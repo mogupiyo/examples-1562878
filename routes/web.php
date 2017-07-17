@@ -19,12 +19,19 @@ Route::get('/', 'TopsController@index');
 
 Auth::routes();
 
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::resource('/profile', 'ProfilesController');
+    Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+});
+
 //Route::get('/home', 'HomeController@index');
 //
 //Auth::routes();
 //
 //Route::get('/home', 'HomeController@index');
-Route::get('about', 'PagesController@about');
+// Route::get('about', 'PagesController@about');
 //
 //Auth::routes();
 //
