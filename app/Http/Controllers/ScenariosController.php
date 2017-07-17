@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Scenario;
 use App\Category;
+use Illuminate\Support\Facades\Log;
 
 class ScenariosController extends Controller
 {
@@ -77,7 +78,12 @@ class ScenariosController extends Controller
             if ($filename) {
                 $request->merge(['thumbnail' => basename($filename)]);
             }
-            $this->scenario_model->addRecord($request);
+            try {
+                $this->scenario_model->addRecord($request);
+            } catch (\Exception $e) {
+                Log::error('データ取得に失敗しました。', [$e]);
+            }
+
 
             return redirect('/mypage/scenarios/')->with('success', '保存しました。');
         } else {
