@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Profile</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" method="GET" action="/profile/{{ Auth::user()->id }}/edit">
+                    <form class="form-horizontal" method="GET" action="/mypage/{{ Auth::user()->id }}/edit">
 
                         <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Name</label>
@@ -27,7 +27,11 @@
                             <label for="email" class="col-md-4 control-label">Icon Image</label>
                             <div class="col-md-6" style="padding-top: 12px;">
                                 <div class="text-left" style="width: 100px; height: 100px;">
-                                    <img src="{{ asset('storage/avatar/' . Auth::user()->picture) }}" alt="avatar" style="width: 100%; height: 100%;">
+                                    @if (Auth::user()->avator)
+                                        <img src="/storage/avator/{{ Auth::user()->avator }}" alt="avatar" style="width: 100%; height: 100%;">
+                                    @else
+                                        <img src="/storage/avator/no-image.jpg" alt="avatar" style="width: 100%; height: 100%;">
+                                    @endif
                                 </div>
                             </div>
                         </div>

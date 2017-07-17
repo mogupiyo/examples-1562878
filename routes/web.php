@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::resource('/profile', 'ProfilesController');
+    Route::resource('/mypage/scenarios', 'ScenariosController');
+    Route::resource('/mypage', 'ProfilesController');
+    Route::post('/mypage/scenarios/{scenario}/edit', 'ScenariosController@editUpload');
+    Route::post('/mypage/upload', 'ProfilesController@upload');
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 });

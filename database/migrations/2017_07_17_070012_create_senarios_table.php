@@ -15,12 +15,12 @@ class CreateSenariosTable extends Migration
     {
         Schema::create('scenarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->index();
             $table->integer('category_id');
             $table->string('title');
             $table->string('description');
             $table->longText('content');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }
