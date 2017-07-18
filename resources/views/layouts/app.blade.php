@@ -61,8 +61,8 @@
                         </div>
                     </form>
                     @if (Auth::guest())
-                        <li><a href="#"><span class=""></span>会員登録</a></li>
-                        <li><a href="#"><span class=""></span>ログイン</a></li>
+                        <li><a href="/register"><span class=""></span>会員登録</a></li>
+                        <li><a href="/login"><span class=""></span>ログイン</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

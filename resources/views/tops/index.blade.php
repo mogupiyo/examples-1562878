@@ -288,7 +288,11 @@ button.accordion.active:after {
                                 </div>
                             </div>
                             <div class="content-footer">
+                                @if ($data->avator)
                                 <img class="user-small-img cover" src="/storage/avator/{{ $data->avator }}">
+                                @else
+                                <img class="user-small-img cover" src="/storage/avator/no-image.jpg">
+                                @endif
                                 <div class="title-text" style="max-width: 160px; position: absolute; left: 54px;font-size: 16px;color: #fff; top: 14px;">
                                     <span style="display:inline-block;">{{ $data->name }}</span>
                                 </div>
