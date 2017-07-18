@@ -307,6 +307,11 @@ button.accordion.active:after {
                             </div>
                         </div>
                         @endforeach
+                        @if (count($stories) === 0)
+                        <div class="serch-message-area" style="margin: 10px 0 20px 0; border-bottom: 1px solid rgba(0,0,0,0.3); border-top: 1px solid rgba(0,0,0,0.3);">
+                            <h4 class="title text-success">「{{ $scenario->name }}」さんが最初のストーリーを執筆中です！お楽しみに！</h4>
+                        </div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <a href="/">
