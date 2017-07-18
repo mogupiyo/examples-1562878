@@ -17,6 +17,7 @@
 
 Route::get('/', 'TopsController@index');
 Route::get('/show/{scenario}', 'TopsController@show');
+Route::get('/show/{scenario}/story/{story}', 'TopsController@showStory');
 
 Auth::routes();
 

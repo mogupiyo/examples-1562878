@@ -19,7 +19,7 @@ class CreateSenariosTable extends Migration
             $table->integer('category_id');
             $table->string('title');
             $table->string('description');
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->string('thumbnail')->nullable();
             $table->timestamps();
         });

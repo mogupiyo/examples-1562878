@@ -40,7 +40,6 @@ class Scenario extends Model
         $this->category_id = $request->category_id;
         $this->thumbnail = $request->thumbnail;
         $this->description = $request->description;
-        $this->content = $request->content;
         return $this->save();
     }
 
@@ -53,8 +52,20 @@ class Scenario extends Model
             $model->thumbnail = $request->thumbnail;
         }
         $model->description = $request->description;
-        $model->content = $request->content;
         return $model->save();
+    }
+
+    /**
+     * 通話時応答挙動リストを削除します。
+     *
+     * @param  integer $id trakcing_callsテーブルのid
+     * @param  \Illuminate\Http\Request  $request リクエスト情報
+     * @return array          登録結果(true: 成功, false: 失敗)
+     */
+    public function deleteRecord($id) {
+        return $this::where('id', $id)
+                    ->where('user_id', Auth::user()->id)
+                    ->delete();
     }
 
     public function scopeLimit($query, $limit = null) {

@@ -80,6 +80,22 @@ class TopsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showStory($scenario_id, $story_id)
+    {
+        $scenario = $this->scenario_model->getRecordById($scenario_id);
+        $scenario_ranks = $this->scenario_model->getRecords(5);
+        $categories = $this->category_model->getRecords();
+        $story = $this->story_model->getRecordById($story_id);
+        $data = compact('categories', 'scenario', 'scenario_ranks', 'story');
+        return view('tops.show-story', $data);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

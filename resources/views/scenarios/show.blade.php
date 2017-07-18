@@ -46,6 +46,11 @@
     text-overflow: ellipsis;
     text-align: left;
 }
+.cover {
+    width: 100px;
+    height: 250px;
+    object-fit: cover;
+}
 </style>
 
 <div class="container">
@@ -53,7 +58,7 @@
         <div class="col col-md-2"></div>
         <div class="col col-md-8">
             <div class="form-group">
-                <p><img src="/storage/thumbnail/{{ $scenario->thumbnail }}" style="width: 100%;"></p>
+                <p><img class="cover" src="/storage/thumbnail/{{ $scenario->thumbnail }}" style="width: 100%;"></p>
             </div>
             <div class="form-group">
                 {{ $errors->first('title') }}
@@ -112,6 +117,12 @@
                     </div>
                 </form>
                 @endforeach
+                @if (count($stories) === 0)
+                <div class="serch-message-area">
+                    <h4 class="title text-danger">ストーリーはまだ投稿されていません。</h4>
+                    <p class="text-danger">「ストーリーを追加する」から初めの１話を登録しましょう！</p>
+                </div>
+                @endif
             </div>
             <div class="form-group footer-control">
                 <a href="/mypage/scenarios/{{ $scenario->id }}/story/create">

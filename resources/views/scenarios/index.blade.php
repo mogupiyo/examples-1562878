@@ -146,6 +146,55 @@ body {
 .table-filter .media .summary {
 	font-size: 14px;
 }
+.story-box {
+    display: table;
+    width: 100%;
+    margin: 10px 0;
+}
+.story-box div {
+    display: table-cell;
+    padding: 10px;
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.3);
+}
+.story-box div.story-scene {
+    /*width: 10%;*/
+    /*text-align: center;*/
+}
+.story-box div.story-thumbnail {
+    width: 20%;
+	vertical-align: middle;
+}
+.story-box div.story-thumbnail img {
+    width: 100%;
+    max-height: 100px;
+    object-fit: cover;
+}
+.story-box div.story-topic {
+    width: 60%;
+	vertical-align: top;
+}
+.story-box div.story-control {
+    width: 20%;
+	vertical-align: top;
+}
+.footer-control {
+    padding: 20px 0;
+    text-align: right;
+}
+.title-text {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.cover {
+    width: 100px;
+    height: 250px;
+    object-fit: cover;
+}
+
 </style>
 <div class="container">
 	<div class="row">
@@ -166,76 +215,57 @@ body {
 								<button type="button" class="btn btn-default btn-filter" data-target="all">すべて</button>
 							</div>
 						</div>
+						<div class="pull-right">
+							<a href="/mypage/scenarios/create">
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary" data-target="all">新しい作品を投稿する</button>
+								</div>
+							</a>
+						</div>
 						<div class="table-container">
-							<table class="table table-filter">
-								<tbody>
-                                    @foreach ($scenarios as $data)
-									<tr data-status="{{ $data->path }}">
-										<td style="width: 10%;">
-											<div class="ckbox">
-												@if ($data->thumbnail)
-													<img src="/storage/thumbnail/{{ $data->thumbnail }}" class="media-photo" style="width: 100%;">
-												@else
-													<img src="/storage/avator/no-image.jpg" class="media-photo" style="width: 100%;">
-												@endif
-											</div>
-										</td>
-										<td style="width: 0%; padding: 0;">
-											<div class="ckbox">
-                                                <input type="checkbox" id="checkbox{{ $data->id }}">
-                                                <!-- <label for="checkbox{{ $data->id }}"></label> -->
-											</div>
-										</td>
-										<td style="width: 90%;">
-											<div class="media">
-												<div class="media-body">
-													<span class="media-meta pull-right">{{ $data->created_at }}</span>
-													<h4 class="title">
-														<a href="/mypage/scenarios/{{ $data->id }}/edit">{{ $data->title }}</a>
-														<span class="pull-right text-muted">{{ $data->label }}</span>
-													</h4>
-													<p class="summary">{{ $data->description }}</p>
-												</div>
-												<div class="media-control" style="text-align: right;">
-													<a href="/mypage/scenarios/{{ $data->id }}" style="color: white;">
-														<div class="btn btn-primary">
-															詳細を見る
-														</div>
-													</a>
-													<a href="/mypage/scenarios/{{ $data->id }}/edit" style="color: white;">
-														<div class="btn btn-success">
-															編集する
-														</div>
-													</a>
-													<button type="button" id="modal-button" class="btn btn-danger" data-toggle="modal" data-target="#modal-example">削除</button>
-												</div>
-											</div>
-										</td>
-									</tr>
-						            <form method="POST" action="/mypage/scenarios/{{ $data->id }}" accept-charset="UTF-8" id="xxx" class="form-horizontal">
-						                <input name="_method" type="hidden" value="DELETE">
-						                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+							@foreach ($scenarios as $data)
+							<div class="story-box" data-status="{{ $data->path }}">
+								<div class="story-thumbnail">
+									<img src="/storage/thumbnail/{{ $data->thumbnail }}" alt="{{ $data->title }}">
+								</div>
+								<div class="story-topic">
+									<p>{{ $data->title }}</p>
+									<p>{{ $data->description }}</p>
+								</div>
+								<div class="story-control">
+									<p>{{ $data->label }}</p>
+									<p class="small">{{ date("Y年m月d日", strtotime($data->created_at)) }}</p>
+									<p class="small">{{ date("H時i分", strtotime($data->created_at)) }}</p>
+									<a href="/mypage/scenarios/{{ $data->id }}">
+										<button type="button" class="btn btn-primary">
+											開く
+										</button>
+									</a>
+									<button type="button" id="modal-button" class="btn btn-danger" data-toggle="modal" data-target="#modal-{{ $data->id }}">削除</button>
+								</div>
+							</div>
+							<form method="POST" action="/mypage/scenarios/{{ $data->id }}" accept-charset="UTF-8" id="xxx" class="form-horizontal">
+								<input name="_method" type="hidden" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-						                <div class="modal fade" id="modal-example">
-						                    <div class="modal-dialog" role="document">
-						                        <div class="modal-content">
-						                            <div class="modal-header">
-						                                <h5 class="modal-title">元に戻せません。削除してよろしいですか?</h5>
-						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						                                    <span aria-hidden="true">&times;</span>
-						                                </button>
-						                            </div>
-						                            <div class="modal-footer">
-						                                <button class="btn btn-danger">削除する</button>
-						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-						                            </div>
-						                        </div>
-						                    </div>
-						                </div>
-						            </form>
-                                    @endforeach
-								</tbody>
-							</table>
+								<div class="modal fade" id="modal-{{ $data->id }}">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">元に戻せません。削除してよろしいですか?</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-footer">
+												<button class="btn btn-danger">削除する</button>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							@endforeach
 						</div>
 					</div>
 				</div>
@@ -254,27 +284,27 @@ body {
 $(document).ready(function () {
 
 	$('.star').on('click', function () {
-      $(this).toggleClass('star-checked');
-    });
+		$(this).toggleClass('star-checked');
+	});
 
-    $('.ckbox label').on('click', function () {
-      $(this).parents('tr').toggleClass('selected');
-    });
+	$('.ckbox label').on('click', function () {
+		$(this).parents('tr').toggleClass('selected');
+	});
 
-    $('.btn-filter').on('click', function () {
-    //   $('.btn').removeClass('btn-success');
-    //   $('.btn').addClass('btn-default');
-    //   $(this).removeClass('btn-default');
-    //   $(this).addClass('btn-success');
-      var $target = $(this).data('target');
-      if ($target != 'all') {
-        $('.table tr').css('display', 'none');
-        $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
-      } else {
-        $('.table tr').css('display', 'none').fadeIn('slow');
-      }
-    });
+	$('.btn-filter').on('click', function () {
+		//   $('.btn').removeClass('btn-success');
+		//   $('.btn').addClass('btn-default');
+		//   $(this).removeClass('btn-default');
+		//   $(this).addClass('btn-success');
+		var $target = $(this).data('target');
+		if ($target != 'all') {
+			$('.story-box').css('display', 'none');
+			$('.story-box[data-status="' + $target + '"]').fadeIn('slow');
+		} else {
+			$('.story-box').css('display', 'none').fadeIn('slow');
+		}
+	});
 
- });
+});
 </script>
 @endsection

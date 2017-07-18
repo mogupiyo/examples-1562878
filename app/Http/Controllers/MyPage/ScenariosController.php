@@ -66,7 +66,6 @@ class ScenariosController extends Controller
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'category_id' => 'required',
-            'content' => 'required',
             'file' => [
                 // 必須
                 'required',
@@ -140,7 +139,6 @@ class ScenariosController extends Controller
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'category_id' => 'required',
-            'content' => 'required',
             'file' => [
                 // 必須
                 // 'required',
@@ -168,7 +166,23 @@ class ScenariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($scenario_id, $story_id)
+    public function destroy($scenario_id)
     {
+        #############################################################
+        # データの削除を実行。
+        #############################################################
+        $result = $this->scenario_model->deleteRecord($scenario_id);
+        if($result){
+            // 削除成功
+            return redirect("/mypage/scenarios")->with([
+                'result_message' => 'データの削除が完了しました。',
+                'result_status' => 'success',
+            ]);
+        }
+        // 削除失敗
+        return redirect("/mypage/scenarios")->with([
+            'result_message' => 'データの削除に失敗しました。',
+            'result_status' => 'failed',
+        ]);
     }
 }

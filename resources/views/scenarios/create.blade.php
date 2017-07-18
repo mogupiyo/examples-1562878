@@ -10,9 +10,10 @@
 
 <div class="container">
     <div class="row">
-        <h4>新しい脚本を投稿する</h4>
         <div class="col col-md-2"></div>
         <div class="col col-md-8">
+            <h3><span class="text-default">新しい作品を投稿する</span></h3>
+            <hr>
             <form method="POST" action="/mypage/scenarios/" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ $errors->first('title') }}
@@ -40,10 +41,6 @@
                 <div class="form-group">
                     <label for="exampleInputFile" name="thumbnail">サムネイル</label>
                     <input type="file" name="file" class="form-control" required>
-                </div>
-                <div class="form-group required">
-                    <label for="contentTextarea" class='control-label'>本文</label>
-                    <textarea class="form-control" name="content" id="contentTextarea" rows="7"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="">
