@@ -14,7 +14,7 @@
         <div class="col col-md-8">
             <h3><span class="text-default">新しい作品を投稿する</span></h3>
             <hr>
-            <form method="POST" action="/mypage/scenarios/" enctype="multipart/form-data">
+            <form method="POST" action="/mypage/scenarios" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ $errors->first('title') }}
                 {{ $errors->first('category_id') }}
