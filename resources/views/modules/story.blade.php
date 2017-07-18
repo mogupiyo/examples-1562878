@@ -16,7 +16,7 @@
     <h1>{{ $story->scene }}  {{ $story->topic }}</h1>
 </div>
 <div class="form-group" style="margin: 60px 0;">
-    <p>{{ nl2br($story->episode) }}</p>
+    <p>{!! nl2br($story->episode) !!}</p>
 </div>
 <div class="form-group">
     <a href="/show/{{ $scenario->id }}">
