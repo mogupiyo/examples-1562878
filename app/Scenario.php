@@ -37,7 +37,11 @@ class Scenario extends Model
         $this->user_id = Auth::user()->id;
         $this->title = $request->title;
         $this->category_id = $request->category_id;
-        $this->thumbnail = $request->thumbnail;
+	if($request->thumbnail){
+            $this->thumbnail = $request->thumbnail;
+	} else {
+            $this->thumbnail = 'no-image.jpg';
+	}	
         $this->description = $request->description;
         return $this->save();
     }
