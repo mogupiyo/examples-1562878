@@ -68,7 +68,7 @@ class ScenariosController extends Controller
             'category_id' => 'required',
             'file' => [
                 // 必須
-                'required',
+                // 'required',
                 // アップロードされたファイルであること
                 'file',
                 // 最小縦横50px 最大縦横1980px
