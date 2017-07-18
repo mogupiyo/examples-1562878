@@ -16,16 +16,24 @@
 // });
 
 Route::get('/', 'TopsController@index');
+Route::get('/show/{scenario}', 'TopsController@show');
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::resource('/mypage/scenarios', 'ScenariosController');
-    Route::resource('/mypage', 'ProfilesController');
-    Route::post('/mypage/scenarios/{scenario}/edit', 'ScenariosController@editUpload');
-    Route::post('/mypage/upload', 'ProfilesController@upload');
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'mypage'], function () {
+
+    Route::resource('/scenarios', 'MyPage\ScenariosController');
+    Route::resource('/scenarios/{scenario}/story', 'MyPage\StoriesController');
+    Route::resource('/', 'MyPage\ProfilesController');
+    Route::post('/scenarios/{scenario}/edit', 'MyPage\ScenariosController@editUpload');
+    Route::post('/scenarios/{scenario}/story/{story}/edit', 'MyPage\StoriesController@editUpload');
+    Route::post('/upload', 'MyPage\ProfilesController@upload');
 
 });
 

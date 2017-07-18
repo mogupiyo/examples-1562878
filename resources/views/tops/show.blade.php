@@ -2,39 +2,10 @@
 
 @section('content')
 <style>
-
-body{background-color:#ECF0F1;}
-
-.navbar-inverse {
-    background-color: #34495E;
-    border-color: #34495E;
+.form-group.required .control-label:after {
+    content:"*";
+    color:red;
 }
-
-.navbar {
-    position: relative;
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: 0px solid transparent;
-    border-radius:0px;
-
-}
-.navbar-brand {
-
-    float: left;
-    height:auto;
-    padding: 10px 10px;
-    font-size: 18px;
-    line-height: 20px;
-}
-.navbar-brand>img{ width:80%;}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: #F39C12;
-}
-.navbar-inverse .navbar-nav > li > a:hover {
-   background-color: #009688;
-}
-
 .btn-default {
     color: #333;
     background-color: #009688;
@@ -44,30 +15,19 @@ body{background-color:#ECF0F1;}
 }
 
 #blog-section{margin-top:40px;margin-bottom:80px;}
-.content-title{padding:10px;background-color:#fff;}
+.content-title{padding:5px;background-color:#fff;}
 .content-title h3 a{color:#34495E;text-decoration:none; transition: 0.5s;}
 .content-title h3 a:hover{color:#F39C12; }
-.content-footer{background-color:#16A085;padding:10px;position: relative;min-height: 50px;}
+.content-footer{background-color:#16A085;padding:10px;position: relative;}
 .content-footer span a {
     color: #fff;
     display: inline-block;
     padding: 6px 5px;
     text-decoration: none;
     transition: 0.5s;
-    position: absolute;
-    left: 50px;
-    top: 14px;
 }
 .content-footer span a:hover{
     color:#F39C12;
-}
-.content-footer span{
-    display: block;
-}
-.pull-right{
-    position: absolute;
-    right: 5px;
-    top: 14px;
 }
 aside{
     margin-top: 30px;
@@ -80,7 +40,6 @@ aside .content-footer>img {
     border-radius: 100%;
     margin-right: 10px;
     border: 2px solid #fff;
-    position: absolute;
 }
 
 .user-ditels {
@@ -105,7 +64,7 @@ aside .content-footer>img {
 .user-small-img{cursor: pointer;}
 
 .content-footer:hover .user-ditels  {
-    /*display: block;*/
+    display: block;
 }
 
 
@@ -117,7 +76,6 @@ aside .content-footer>img {
     padding-top: 10px;
     padding-right: 28px;
     text-align: right;
-    object-fit: cover; /* この一行を追加するだけ！ */
 }
 .user-full-ditels p{
     color: #fff;
@@ -261,6 +219,40 @@ button.accordion.active:after {
     height: 200px;
     object-fit: cover; /* この一行を追加するだけ！ */
 }
+.story-box {
+    display: table;
+    width: 100%;
+    margin: 10px 0;
+}
+.story-box div {
+    display: table-cell;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+.story-box div.story-scene {
+    width: 10%;
+    /*text-align: center;*/
+}
+.story-box div.story-thumbnail {
+    width: 20%;
+}
+.story-box div.story-thumbnail img {
+    width: 100%;
+    max-height: 100px;
+    object-fit: cover;
+}
+.story-box div.story-topic {
+    width: 50%;
+}
+.story-box div.story-control {
+    width: 20%;
+    text-align: right;
+}
+.footer-control {
+    padding: 20px 0;
+    text-align: right;
+}
 .title-text {
     display: block;
     overflow: hidden;
@@ -268,52 +260,65 @@ button.accordion.active:after {
     text-overflow: ellipsis;
     text-align: left;
 }
+
 </style>
 
 <section id="blog-section" >
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div class="row">
+                <div class="row" style="margin-top: 10px; padding: 20px;">
 
-                    @foreach($scenarios as $data)
-                    <div class="col-lg-4 col-md-4">
-                        <aside>
-                            <div class="" style="width: 100%; height: 200px; background-color: black;">
-                                <img src="/storage/thumbnail/{{ $data->thumbnail }}" class="img-responsive cover" style="width: 100%;">
-                            </div>
-                            <div class="content-title">
-                                <div class="text-center">
-                                    <span class="title-text"><a href="/show/{{ $data->id }}">{{ $data->title }}</a></span>
-                                </div>
-                            </div>
-                            <div class="content-footer">
-                                <img class="user-small-img cover" src="/storage/avator/{{ $data->avator }}">
-                                <div class="title-text" style="max-width: 160px; position: absolute; left: 54px;font-size: 16px;color: #fff; top: 14px;">
-                                    <span style="display:inline-block;">{{ $data->name }}</span>
-                                </div>
-                                <!-- <div class="pull-right" style="color: #fff;">
-                                    <a href="#" data-toggle="tooltip" data-placement="left" title="コメント" style="color: #fff">30</a>
-                                    <a href="#" data-toggle="tooltip" data-placement="right" title="いいね" style="color: #fff">20</a>
-                                </div> -->
-                                <!-- <div class="user-ditels">
-                                    <div class="user-img"><img src="/storage/avator/{{ $data->avator }}" class="img-responsive cover"></div>
-                                    <span class="user-full-ditels">
-                                        <h3>{{ $data->name }}</h3>
-                                        <p>Web & Graphics Disigner</p>
-                                    </span>
-                                    <div class="social-icon">
-                                        <a href="#"><i class="fa fa-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus" data-toggle="tooltip" data-placement="bottom" title="Google Plus"></i></a>
-                                        <a href="#"><i class="fa fa-youtube" data-toggle="tooltip" data-placement="bottom" title="Youtube"></i></a>
-                                        <a href="#"><i class="fa fa-github" data-toggle="tooltip" data-placement="bottom" title="Github"></i></a>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </aside>
+                    <div class="form-group">
+                        <p><img class="cover" src="/storage/thumbnail/{{ $scenario->thumbnail }}" style="width: 100%;"></p>
                     </div>
-                    @endforeach
+                    <div class="form-group">
+                        {{ $errors->first('title') }}
+                        <label for="exampleInputEmail1" class='control-label'>タイトル</label>
+                        <p>{{ $scenario->title }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="descTextarea" class='control-label'>概要</label>
+                        <p>{{ $scenario->description }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleCategory" class='control-label'>カテゴリ</label>
+                        <p>{{ $scenario->label }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="contentTextarea" class='control-label'>本文</label>
+                        <p>{{ $scenario->content }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="contentTextarea" class='control-label'>ストーリー</label>
+                        @foreach ($stories as $data)
+                        <div class="story-box">
+                            <div class="story-scene">
+                                <span>{{ $data->scene }}</span>
+                            </div>
+                            <div class="story-thumbnail">
+                                <span><img src="/storage/stories/{{ $data->thumbnail }}" alt="{{ $data->scene }}{{ $data->topic }}"></span>
+                            </div>
+                            <div class="story-topic">
+                                {{ $data->topic }}
+                            </div>
+                            <div class="story-control">
+                                <a href="/scenarios/{{ $scenario->id }}/story/{{ $data->id }}">
+                                    <button type="button" class="btn btn-success">
+                                        読む
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="form-group">
+                        <a href="/">
+                            <button type="button" class="btn btn-primary">
+                                戻る
+                            </button>
+                        </a>
+                    </div>
 
                 </div>
             </div>
@@ -324,35 +329,4 @@ button.accordion.active:after {
     </div>
 
 </section>
-
-
-
-
-<script src="js/jquery-3.1.1.js"></script>
-<script src="js/bootstrap.js"></script>
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-
-
-
-
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-    acc[i].onclick = function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight){
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-        }
-    }
-}
-</script>
-
 @endsection

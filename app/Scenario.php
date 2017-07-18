@@ -16,7 +16,16 @@ class Scenario extends Model
                     ->first();
     }
 
-    public function getRecords() {
+    public function getRecords($limit = null) {
+        return $this::JoinCategories()
+                    ->JoinUsers()
+                    ->SelectCol()
+                    ->Desc()
+                    ->Limit($limit)
+                    ->get();
+    }
+
+    public function getMyRecords() {
         return $this::Login()
                     ->JoinCategories()
                     ->JoinUsers()
@@ -46,6 +55,12 @@ class Scenario extends Model
         $model->description = $request->description;
         $model->content = $request->content;
         return $model->save();
+    }
+
+    public function scopeLimit($query, $limit = null) {
+        if ($limit) {
+            $query->take($limit);
+        }
     }
 
     public function scopeTarget($query, $id) {

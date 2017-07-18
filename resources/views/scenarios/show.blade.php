@@ -6,6 +6,46 @@
    content:"*";
    color:red;
 }
+.story-box {
+    display: table;
+    width: 100%;
+    margin: 10px 0;
+}
+.story-box div {
+    display: table-cell;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+.story-box div.story-scene {
+    width: 10%;
+    /*text-align: center;*/
+}
+.story-box div.story-thumbnail {
+    width: 20%;
+}
+.story-box div.story-thumbnail img {
+    width: 100%;
+    max-height: 100px;
+    object-fit: cover;
+}
+.story-box div.story-topic {
+    width: 50%;
+}
+.story-box div.story-control {
+    width: 20%;
+}
+.footer-control {
+    padding: 20px 0;
+    text-align: right;
+}
+.title-text {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
 </style>
 
 <div class="container">
@@ -28,14 +68,60 @@
                 <label for="exampleCategory" class='control-label'>カテゴリ</label>
                 <p>{{ $scenario->label }}</p>
             </div>
-            <div class="form-group required">
-                <label for="contentTextarea" class='control-label'>本文</label>
-                <p>{{ $scenario->content }}</p>
-            </div>
             <div class="form-group">
-                <a href="/mypage/scenarios/{{ $scenario->id }}/edit">
+                <label for="contentTextarea" class='control-label'>ストーリー</label>
+                @foreach ($stories as $data)
+                <div class="story-box">
+                    <div class="story-scene">
+                        <span>{{ $data->scene }}</span>
+                    </div>
+                    <div class="story-thumbnail">
+                        <span><img src="/storage/stories/{{ $data->thumbnail }}" alt="{{ $data->scene }}{{ $data->topic }}"></span>
+                    </div>
+                    <div class="story-topic">
+                        {{ $data->topic }}
+                    </div>
+                    <div class="story-control">
+                        <a href="/mypage/scenarios/{{ $scenario->id }}/story/{{ $data->id }}/edit">
+                            <button type="button" class="btn btn-success">
+                                編集
+                            </button>
+                        </a>
+                        <button type="button" id="modal-button" class="btn btn-danger" data-toggle="modal" data-target="#modal-{{ $data->id }}">削除</button>
+                    </div>
+                </div>
+                <form method="POST" action="/mypage/scenarios/{{ $scenario->id }}/story/{{ $data->id }}/" accept-charset="UTF-8" id="xxx" class="form-horizontal">
+                    <input name="_method" type="hidden" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    <div class="modal fade" id="modal-{{ $data->id }}">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">元に戻せません。削除してよろしいですか?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger">削除する</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                @endforeach
+            </div>
+            <div class="form-group footer-control">
+                <a href="/mypage/scenarios/{{ $scenario->id }}/story/create">
                     <button type="button" class="btn btn-primary">
-                        編集する
+                        ストーリーを追加する
+                    </button>
+                </a>
+                <a href="/mypage/scenarios/{{ $scenario->id }}/edit">
+                    <button type="button" class="btn btn-success">
+                        作品を編集する
                     </button>
                 </a>
             </div>

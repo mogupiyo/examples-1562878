@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -36,17 +37,18 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#">脚本家になろう！とは</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">ご案内<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Page 1-1</a></li>
-                            <li><a href="#">Page 1-2</a></li>
-                            <li><a href="#">Page 1-3</a></li>
+                            <li><a href="#">初めての方へ</a></li>
+                            <li><a href="#">作者の方へ</a></li>
+                            <li><a href="#">読者の方へ</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Page 2</a></li>
-                    <li><a href="#">Page 3</a></li>
+                    <li><a href="#">公式ブログ</a></li>
+                    <li><a href="#">質問板</a></li>
+                    <li><a href="#">ランキング</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <form class="navbar-form navbar-left">
@@ -54,14 +56,14 @@
                             <input type="text" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
-                                    <i class="glyphicon glyphicon-search"></i>
+                                    <span>検索</span>
                                 </button>
                             </div>
                         </div>
                     </form>
                     @if (Auth::guest())
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>会員登録</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>ログイン</a></li>
+                        <li><a href="#"><span class=""></span>会員登録</a></li>
+                        <li><a href="#"><span class=""></span>ログイン</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

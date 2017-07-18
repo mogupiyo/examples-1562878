@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MyPage;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use App\Http\Controllers\Controller;
 
 class ProfilesController extends Controller
 {

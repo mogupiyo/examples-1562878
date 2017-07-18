@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group required">
                     {{ $errors->first('content') }}
-                    <label for="contentTextarea" class='control-label'>本文</label>
+                    <label for="contentTextarea" class='control-label'>ストーリー</label>
                     <textarea class="form-control" name="content" id="contentTextarea" rows="7">
 {{ $scenario->content }}
                     </textarea>

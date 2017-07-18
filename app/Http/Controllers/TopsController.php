@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Scenario;
 use App\Category;
+use App\Story;
 
 class TopsController extends Controller
 {
@@ -15,14 +16,16 @@ class TopsController extends Controller
      */
     protected $scenario_model;
     protected $category_model;
+    protected $story_model;
 
     /**
      * Construct ScenariosController
      */
-    public function __construct(Scenario $scenario_model, Category $category_model)
+    public function __construct(Scenario $scenario_model, Category $category_model, Story $story_model)
     {
         $this->scenario_model = $scenario_model;
         $this->category_model = $category_model;
+        $this->story_model = $story_model;
     }
 
     /**
@@ -33,8 +36,9 @@ class TopsController extends Controller
     public function index()
     {
         $scenarios = $this->scenario_model->getRecords();
+        $scenario_ranks = $this->scenario_model->getRecords(5);
         $categories = $this->category_model->getRecords();
-        $data = compact('scenarios', 'categories');
+        $data = compact('scenarios', 'scenario_ranks', 'categories');
         return view('tops.index', $data);
     }
 
@@ -67,7 +71,12 @@ class TopsController extends Controller
      */
     public function show($id)
     {
-        //
+        $scenario = $this->scenario_model->getRecordById($id);
+        $scenario_ranks = $this->scenario_model->getRecords(5);
+        $categories = $this->category_model->getRecords();
+        $stories = $this->story_model->getRecordsById($id);
+        $data = compact('categories', 'scenario', 'scenario_ranks', 'stories');
+        return view('tops.show', $data);
     }
 
     /**
