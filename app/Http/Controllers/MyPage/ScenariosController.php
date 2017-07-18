@@ -37,7 +37,7 @@ class ScenariosController extends Controller
      */
     public function index()
     {
-        $scenarios = $this->scenario_model->getRecords();
+        $scenarios = $this->scenario_model->getMyRecords();
         $data = compact('scenarios');
         return view('scenarios.index', $data);
     }
