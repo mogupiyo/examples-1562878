@@ -76,25 +76,19 @@ class ScenariosController extends Controller
             ]
         ]);
 
-        if ($request->file('file')->isValid([])) {
+        if($request->file){
             $filename = $request->file->store('public/thumbnail');
             if ($filename) {
                 $request->merge(['thumbnail' => basename($filename)]);
             }
-            try {
-                $this->scenario_model->addRecord($request);
-            } catch (\Exception $e) {
-                Log::error('データ取得に失敗しました。', [$e]);
-            }
-
-
-            return redirect('/mypage/scenarios/')->with('success', '保存しました。');
-        } else {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors(['file' => '不正な画像データです。']);
+	}
+        try {
+            $this->scenario_model->addRecord($request);
+        } catch (\Exception $e) {
+            Log::error('データ取得に失敗しました。', [$e]);
         }
+
+       return redirect('/mypage/scenarios')->with('success', '保存しました。');
     }
 
     /**
