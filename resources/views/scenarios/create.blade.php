@@ -13,7 +13,7 @@
         <h4>新しい脚本を投稿する</h4>
         <div class="col col-md-2"></div>
         <div class="col col-md-8">
-            <form method="POST" action="/mypage/scenarios/" enctype="multipart/form-data">
+            <form method="POST" action="/mypage/scenarios" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ $errors->first('title') }}
                 {{ $errors->first('category_id') }}
