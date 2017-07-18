@@ -121,7 +121,7 @@ class ProfilesController extends Controller
             $user->avator = basename($filename);
             $user->save();
 
-            return redirect('/mypage')->with('success', '保存しました。');
+            return redirect('/mypage/user')->with('success', '保存しました。');
         } else {
             return redirect()
                 ->back()

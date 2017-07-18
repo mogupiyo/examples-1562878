@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Story extends Model
 {
     public function getRecordById($id) {
-        return $this::Login()
-                    ->Target($id)
+        return $this::Target($id)
                     // ->JoinCategories()
                     // ->JoinUsers()
                     // ->SelectCol()
