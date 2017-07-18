@@ -77,7 +77,7 @@
                                     <a href="{{ url('/mypage/scenarios') }}">自分の投稿</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('/mypage') }}">プロフィール</a>
+                                    <a href="{{ url('/mypage/user') }}">プロフィール</a>
                                 </li>
                                 <li>
                                     <a href="{{ url('/logout') }}"
