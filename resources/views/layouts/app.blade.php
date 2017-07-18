@@ -21,6 +21,12 @@
         ]); ?>
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <style>
+        /*body {*/
+            /*background: url('/img/bg-sample.jpg');*/
+            /*background-color: rgba(0,0,0,0.2);*/
+        /*}*/
+    </style>
 </head>
 <body>
 
@@ -33,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img src="https://lh3.googleusercontent.com/-N4NB2F966TU/WM7V1KYusRI/AAAAAAAADtA/fPvGVNzOkCo7ZMqLI6pPITE9ZF7NONmawCJoC/w185-h40-p-rw/logo.png"></a>
+                <a class="navbar-brand" href="/"><img src="/img/sample_logo.png"></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">

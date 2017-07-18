@@ -3,37 +3,6 @@
 @section('content')
 <style>
 
-body{background-color:#ECF0F1;}
-
-.navbar-inverse {
-    background-color: #34495E;
-    border-color: #34495E;
-}
-
-.navbar {
-    position: relative;
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: 0px solid transparent;
-    border-radius:0px;
-
-}
-.navbar-brand {
-
-    float: left;
-    height:auto;
-    padding: 10px 10px;
-    font-size: 18px;
-    line-height: 20px;
-}
-.navbar-brand>img{ width:80%;}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: #F39C12;
-}
-.navbar-inverse .navbar-nav > li > a:hover {
-   background-color: #009688;
-}
 
 .btn-default {
     color: #333;
