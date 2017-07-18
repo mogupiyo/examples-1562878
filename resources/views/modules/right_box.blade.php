@@ -1,5 +1,12 @@
 <!--           // RECENT POST===========-->
 <div class="col-lg-4">
+    <div class="widget-sidebar" style="padding: 0;">
+        <a href="/mypage/scenarios/create">
+            <div class="content-widget-sidebar">
+                <button class="btn btn-primary" type="button" name="button" style="width: 100%;">＋ 作品を投稿する</button>
+            </div>
+        </a>
+    </div>
     <div class="widget-sidebar">
         <h2 class="title-widget-sidebar">ランキング</h2>
         <div class="content-widget-sidebar">
