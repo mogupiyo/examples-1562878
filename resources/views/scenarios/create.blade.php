@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile" name="thumbnail">サムネイル</label>
-                    <input type="file" name="file" class="form-control" required>
+                    <input type="file" name="file" class="form-control">
                 </div>
                 <div class="form-group">
                     <div class="">
