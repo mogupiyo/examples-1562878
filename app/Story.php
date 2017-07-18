@@ -89,7 +89,9 @@ class Story extends Model
     }
 
     public function scopeLogin($query) {
-        $query->where('user_id', '=', Auth::user()->id);
+        if (!Auth::guest()) {
+            $query->where('user_id', '=', Auth::user()->id);
+        }
     }
 
     public function scopeJoinCategories($query) {
