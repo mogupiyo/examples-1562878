@@ -19,6 +19,7 @@
 }
 .story-box div.story-scene {
     width: 10%;
+    min-width: 75px;
     /*text-align: center;*/
 }
 .story-box div.story-thumbnail {

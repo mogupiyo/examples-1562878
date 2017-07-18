@@ -232,6 +232,7 @@ button.accordion.active:after {
 }
 .story-box div.story-scene {
     width: 10%;
+    min-width: 75px;
     /*text-align: center;*/
 }
 .story-box div.story-thumbnail {
@@ -289,7 +290,7 @@ button.accordion.active:after {
                         <label for="contentTextarea" class='control-label'>ストーリー</label>
                         @foreach ($stories as $data)
                         <div class="story-box">
-                            <div class="story-scene">
+                            <div class="story-scene title-text">
                                 <span>{{ $data->scene }}</span>
                             </div>
                             <div class="story-thumbnail">
