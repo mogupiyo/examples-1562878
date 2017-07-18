@@ -286,10 +286,6 @@ button.accordion.active:after {
                         <p>{{ $scenario->label }}</p>
                     </div>
                     <div class="form-group">
-                        <label for="contentTextarea" class='control-label'>本文</label>
-                        <p>{{ $scenario->content }}</p>
-                    </div>
-                    <div class="form-group">
                         <label for="contentTextarea" class='control-label'>ストーリー</label>
                         @foreach ($stories as $data)
                         <div class="story-box">
