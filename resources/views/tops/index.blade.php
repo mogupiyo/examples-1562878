@@ -248,14 +248,16 @@ button.accordion.active:after {
                     @foreach($scenarios as $data)
                     <div class="col-lg-4 col-md-4">
                         <aside>
-                            <div class="" style="width: 100%; height: 200px; background-color: black;">
-                                <img src="/storage/thumbnail/{{ $data->thumbnail }}" class="img-responsive cover" style="width: 100%;">
-                            </div>
-                            <div class="content-title">
-                                <div class="text-center">
-                                    <span class="title-text"><a href="/show/{{ $data->id }}">{{ $data->title }}</a></span>
+                            <a href="/show/{{ $data->id }}">
+                                <div class="" style="width: 100%; height: 200px; background-color: black;">
+                                    <img src="/storage/thumbnail/{{ $data->thumbnail }}" class="img-responsive cover" style="width: 100%;">
                                 </div>
-                            </div>
+                                <div class="content-title">
+                                    <div class="text-center">
+                                        <span class="title-text">{{ $data->title }}</span>
+                                    </div>
+                                </div>
+                            </a>
                             <div class="content-footer">
                                 @if ($data->avator)
                                 <img class="user-small-img cover" src="/storage/avator/{{ $data->avator }}">
