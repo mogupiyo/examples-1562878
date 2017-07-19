@@ -337,7 +337,7 @@ button.accordion.active:after {
                     </div> -->
                     @endforeach
                     @foreach($scenarios as $data)
-                    <a href="/show/{{ $data->id }}/story/{{ $data->id }}">
+                    <a href="/show/{{ $data->id }}">
                         <div class="story-box">
                             <div class="story-scene title-text">
                                 <span>{{ date("m/d H:i", strtotime($data->created_at)) }}</span>
@@ -379,7 +379,7 @@ button.accordion.active:after {
                     </div> -->
                     @endforeach
                     @foreach($scenarios as $data)
-                    <a href="/show/{{ $data->id }}/story/{{ $data->id }}">
+                    <a href="/show/{{ $data->id }}">
                         <div class="story-box">
                             <div class="story-scene title-text">
                                 <span>{{ date("m/d H:i", strtotime($data->created_at)) }}</span>
