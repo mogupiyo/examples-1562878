@@ -237,16 +237,81 @@ button.accordion.active:after {
     text-overflow: ellipsis;
     text-align: left;
 }
+.cover {
+    width: 100px;
+    height: 200px;
+    object-fit: cover;
+}
+.story-box {
+    display: table;
+    width: 100%;
+    margin: 10px 0;
+}
+.story-box div {
+    display: table-cell;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+.story-box div.story-scene {
+    width: 5%;
+    min-width: 75px;
+    /*text-align: center;*/
+}
+.story-box div.story-thumbnail {
+    width: 20%;
+}
+.story-box div.story-thumbnail img {
+    width: 100%;
+    max-height: 100px;
+    object-fit: cover;
+}
+.story-box div.story-topic {
+    width: 50%;
+}
+.story-box div.story-control {
+    width: 25%;
+    text-align: right;
+}
+.footer-control {
+    padding: 20px 0;
+    text-align: right;
+}
+.title-text {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
 </style>
 
 <section id="blog-section" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            @include('modules.left_box')
+            <div class="col-lg-6" style="margin-top: 20px;">
                 <div class="row">
 
                     @foreach($scenarios as $data)
-                    <div class="col-lg-4 col-md-4">
+                    <a href="/show/{{ $data->id }}/story/{{ $data->id }}">
+                        <div class="story-box">
+                            <div class="story-scene title-text">
+                                <span>{{ date("m/d H:i", strtotime($data->created_at)) }}</span>
+                            </div>
+                            <!-- <div class="story-thumbnail">
+                            <span><img src="/storage/stories/{{ $data->thumbnail }}" alt="{{ $data->scene }}{{ $data->topic }}"></span>
+                            </div> -->
+                            <div class="story-topic">
+                                {{ $data->title }}
+                            </div>
+                            <div class="story-control">
+                                作：{{ $data->name }}
+                            </div>
+                        </div>
+                    </a>
+                    <!-- <div class="col-lg-4 col-md-4">
                         <aside>
                             <a href="/show/{{ $data->id }}">
                                 <div class="" style="width: 100%; height: 200px; background-color: black;">
@@ -267,27 +332,93 @@ button.accordion.active:after {
                                 <div class="title-text" style="max-width: 160px; position: absolute; left: 54px;font-size: 16px;color: #fff; top: 14px;">
                                     <span style="display:inline-block;">{{ $data->name }}</span>
                                 </div>
-                                <!-- <div class="pull-right" style="color: #fff;">
-                                    <a href="#" data-toggle="tooltip" data-placement="left" title="コメント" style="color: #fff">30</a>
-                                    <a href="#" data-toggle="tooltip" data-placement="right" title="いいね" style="color: #fff">20</a>
-                                </div> -->
-                                <!-- <div class="user-ditels">
-                                    <div class="user-img"><img src="/storage/avator/{{ $data->avator }}" class="img-responsive cover"></div>
-                                    <span class="user-full-ditels">
-                                        <h3>{{ $data->name }}</h3>
-                                        <p>Web & Graphics Disigner</p>
-                                    </span>
-                                    <div class="social-icon">
-                                        <a href="#"><i class="fa fa-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus" data-toggle="tooltip" data-placement="bottom" title="Google Plus"></i></a>
-                                        <a href="#"><i class="fa fa-youtube" data-toggle="tooltip" data-placement="bottom" title="Youtube"></i></a>
-                                        <a href="#"><i class="fa fa-github" data-toggle="tooltip" data-placement="bottom" title="Github"></i></a>
-                                    </div>
-                                </div> -->
                             </div>
                         </aside>
-                    </div>
+                    </div> -->
+                    @endforeach
+                    @foreach($scenarios as $data)
+                    <a href="/show/{{ $data->id }}/story/{{ $data->id }}">
+                        <div class="story-box">
+                            <div class="story-scene title-text">
+                                <span>{{ date("m/d H:i", strtotime($data->created_at)) }}</span>
+                            </div>
+                            <!-- <div class="story-thumbnail">
+                            <span><img src="/storage/stories/{{ $data->thumbnail }}" alt="{{ $data->scene }}{{ $data->topic }}"></span>
+                            </div> -->
+                            <div class="story-topic">
+                                {{ $data->title }}
+                            </div>
+                            <div class="story-control">
+                                作：{{ $data->name }}
+                            </div>
+                        </div>
+                    </a>
+                    <!-- <div class="col-lg-4 col-md-4">
+                        <aside>
+                            <a href="/show/{{ $data->id }}">
+                                <div class="" style="width: 100%; height: 200px; background-color: black;">
+                                    <img src="/storage/thumbnail/{{ $data->thumbnail }}" class="img-responsive cover" style="width: 100%;">
+                                </div>
+                                <div class="content-title">
+                                    <div class="text-center">
+                                        <span class="title-text">{{ $data->title }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content-footer">
+                                @if ($data->avator)
+                                <img class="user-small-img cover" src="/storage/avator/{{ $data->avator }}">
+                                @else
+                                <img class="user-small-img cover" src="/storage/thumbnail/no-image.jpg">
+                                @endif
+                                <div class="title-text" style="max-width: 160px; position: absolute; left: 54px;font-size: 16px;color: #fff; top: 14px;">
+                                    <span style="display:inline-block;">{{ $data->name }}</span>
+                                </div>
+                            </div>
+                        </aside>
+                    </div> -->
+                    @endforeach
+                    @foreach($scenarios as $data)
+                    <a href="/show/{{ $data->id }}/story/{{ $data->id }}">
+                        <div class="story-box">
+                            <div class="story-scene title-text">
+                                <span>{{ date("m/d H:i", strtotime($data->created_at)) }}</span>
+                            </div>
+                            <!-- <div class="story-thumbnail">
+                            <span><img src="/storage/stories/{{ $data->thumbnail }}" alt="{{ $data->scene }}{{ $data->topic }}"></span>
+                            </div> -->
+                            <div class="story-topic">
+                                {{ $data->title }}
+                            </div>
+                            <div class="story-control">
+                                作：{{ $data->name }}
+                            </div>
+                        </div>
+                    </a>
+                    <!-- <div class="col-lg-4 col-md-4">
+                        <aside>
+                            <a href="/show/{{ $data->id }}">
+                                <div class="" style="width: 100%; height: 200px; background-color: black;">
+                                    <img src="/storage/thumbnail/{{ $data->thumbnail }}" class="img-responsive cover" style="width: 100%;">
+                                </div>
+                                <div class="content-title">
+                                    <div class="text-center">
+                                        <span class="title-text">{{ $data->title }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content-footer">
+                                @if ($data->avator)
+                                <img class="user-small-img cover" src="/storage/avator/{{ $data->avator }}">
+                                @else
+                                <img class="user-small-img cover" src="/storage/thumbnail/no-image.jpg">
+                                @endif
+                                <div class="title-text" style="max-width: 160px; position: absolute; left: 54px;font-size: 16px;color: #fff; top: 14px;">
+                                    <span style="display:inline-block;">{{ $data->name }}</span>
+                                </div>
+                            </div>
+                        </aside>
+                    </div> -->
                     @endforeach
 
                 </div>

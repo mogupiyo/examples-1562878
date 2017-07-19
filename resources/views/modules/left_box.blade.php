@@ -1,24 +1,18 @@
 <!--           // RECENT POST===========-->
 <div class="col-lg-3">
-    <div class="widget-sidebar" style="padding: 0;">
-        <a href="/mypage/scenarios/create">
-            <div class="content-widget-sidebar">
-                <button class="btn btn-primary" type="button" name="button" style="width: 100%;">＋ 作品を投稿する</button>
-            </div>
-        </a>
-    </div>
     <div class="widget-sidebar">
         <h2 class="title-widget-sidebar">ランキング</h2>
         <div class="content-widget-sidebar">
             <ul style="padding: 0;">
                 @foreach ($scenario_ranks as $data)
                 <li class="recent-post">
-                    <div class="post-img">
+                    <!-- <div class="post-img">
                         <img class="cover" src="/storage/thumbnail/{{ $data->thumbnail }}" class="img-responsive">
-                    </div>
-                    <a href="#"><h5>{{ $data->title }}</h5></a>
-                    <p style="margin: 0;"><small>{{ $data->name }}</small></p>
-                    <p><small>{{ $data->created_at }}</small></p>
+                    </div> -->
+                    <p>† {{ $loop->index + 1 }}位 †</p>
+                    <a href="/show/{{ $data->id }}"><h5>{{ $data->title }}</h5></a>
+                    <p style="margin: 0;"><small>作：{{ $data->name }}</small></p>
+                    <!-- <p><small>{{ date("m/d H:i", strtotime($data->created_at)) }}</small></p> -->
                 </li>
                 <hr>
                 @endforeach
@@ -32,14 +26,14 @@
             <ul style="padding: 0;">
                 @foreach ($scenario_ranks as $data)
                 <li class="recent-post">
-                    <div class="post-img">
+                    <!-- <div class="post-img">
                         <img class="cover" src="/storage/thumbnail/{{ $data->thumbnail }}" class="img-responsive">
-                    </div>
-                    <a href="#"><h5>{{ $data->title }}</h5></a>
-                    <p style="margin: 0;"><small>{{ $data->name }}</small></p>
-                    <p><small>{{ $data->created_at }}</small></p>
+                    </div> -->
+                    <a href="/show/{{ $data->id }}"><h5>{{ $data->title }}</h5></a>
+                    <p style="margin: 0;"><small>作：{{ $data->name }}</small></p>
+                    <p><small>{{ date("m/d H:i", strtotime($data->created_at)) }}</small></p>
                 </li>
-                <hr>
+                <hr style="margin: 5px 0 15px 0;">
                 @endforeach
             </ul>
         </div>
