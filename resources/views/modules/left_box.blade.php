@@ -94,28 +94,5 @@
         </div> -->
     </div>
 
-    <!--=====================
-    CATEGORIES
-    ======================-->
-    <div class="widget-sidebar">
-        <h2 class="title-widget-sidebar">カテゴリ別</h2>
-        @foreach ($categories as $data)
-        <button class="categories-btn">{{ $data->label }}</button>
-        @endforeach
-    </div>
-
-    <!--=====================
-    NEWSLATTER
-    ======================-->
-    <div class="widget-sidebar">
-        <h2 class="title-widget-sidebar">ニュースを受け取る</h2>
-        <p>お知らせをメールで受け取る場合など</p>
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-            <input id="email" type="text" class="form-control" name="email" placeholder="Email">
-        </div>
-        <button type="button" class="btn btn-warning">送る</button>
-    </div>
-
 
 </div>
