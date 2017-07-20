@@ -32,6 +32,6 @@
 </div>
 <div class="footer-copyright table">
     <div class="col-lg-12 small">
-        <p>Copyright &copy; {{ date("Y") }} THE BLACKBOX LIST All Rights Reserved.</p>
+        <p>Copyright &copy; {{ date("Y") }} THE BLACK LIST All Rights Reserved.</p>
     </div>
 </div>

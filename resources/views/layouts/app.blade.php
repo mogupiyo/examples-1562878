@@ -33,7 +33,8 @@
 
     <nav class="navbar navbar-inverse">
         <div class="container">
-            <div class="navbar-header">
+            @include('modules.header')
+            <!-- <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -100,7 +101,7 @@
                         </li>
                     @endif
                 </ul>
-            </div>
+            </div> -->
         </div>
     </nav>
 

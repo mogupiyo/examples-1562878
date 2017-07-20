@@ -232,7 +232,7 @@
             <div class="col-lg-12">
             </div>
         </div>
-        <!-- <div class="ad-box">
+        <div class="ad-box">
             <div class="col-lg-4">
                 @include('modules.advertise.banner')
             </div>
@@ -242,7 +242,7 @@
             <div class="col-lg-4">
                 @include('modules.advertise.banner')
             </div>
-        </div> -->
+        </div>
         <!-- <div class="footer-margin">
             <div class="col-lg-12">
             </div>
