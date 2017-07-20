@@ -396,9 +396,9 @@ button.accordion.active:after {
     border-bottom: 5px solid #000;
 }
 .menu-box div:hover {
-    color: #F7BE81;
+    color: #fff;
     background-color: #000;
-    border-bottom: 5px solid #F7BE81;
+    border-bottom: 5px solid rgb(0, 150, 136);
 }
 .rank-title div {
     height: 50px;
@@ -471,7 +471,7 @@ button.accordion.active:after {
     color: #fff;
 }
 .footer-content div a:hover{
-    color: #F7BE81;
+    color: rgb(0, 150, 136);
 }
 
 .footer-content div {
