@@ -262,6 +262,10 @@ button.accordion.active:after {
     text-align: left;
 }
 
+.container {
+    /*background-color: #fff;*/
+}
+
 </style>
 
 <section id="blog-section" >

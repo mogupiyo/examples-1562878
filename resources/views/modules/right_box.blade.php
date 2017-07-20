@@ -1,5 +1,5 @@
 <!--           // RECENT POST===========-->
-<div class="col-lg-3">
+<div class="col-lg-4">
     <div class="widget-sidebar" style="padding: 0;">
         <a href="/mypage/scenarios/create">
             <div class="content-widget-sidebar">
