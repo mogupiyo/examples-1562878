@@ -10,9 +10,23 @@ use Lang;
 use Validator;
 use App\Http\Requests;
 use App\Mail\MailManager;
+use App\MyLibs\MailManger as MailPHP;
 
 class TempRegistController extends Controller
 {
+
+    protected $mail_manager;
+
+    /**
+     * Construct the TempRegistController
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct(MailPHP $mail_manager)
+    {
+        $this->mail_manager = $mail_manager;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +61,8 @@ class TempRegistController extends Controller
             'actionUrl' => \Config::get('app.url').'/register?email='.$request->email,
         ];
         try {
-            Mail::to($options['to'])->send(new MailManager($options, $data));
+            // Mail::to($options['to'])->send(new MailManager($options, $data));
+            $this->mail_manager->send();
             return redirect('/tempregist')->with([
                 'status' => 'success'
             ]);
