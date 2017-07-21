@@ -62,7 +62,7 @@ class TempRegistController extends Controller
         ];
         try {
             // Mail::to($options['to'])->send(new MailManager($options, $data));
-            $this->mail_manager->send();
+            $this->mail_manager->send($options, $data);
             return redirect('/tempregist')->with([
                 'status' => 'success'
             ]);
