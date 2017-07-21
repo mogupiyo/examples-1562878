@@ -18,6 +18,8 @@
 Route::get('/', 'TopsController@index');
 Route::get('/show/{scenario}', 'TopsController@show');
 Route::get('/show/{scenario}/story/{story}', 'TopsController@showStory');
+Route::resource('/tempregist', 'TempRegistController');
+Route::get('/error', 'ErrorsController@index');
 
 Auth::routes();
 

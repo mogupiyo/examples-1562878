@@ -31,20 +31,20 @@
             </div>
         </nav>
 
-        <div id="container" class="container">
+        <div id="contents" class="container">
             <div class="row">
                 @yield('content')
             </div>
         </div>
-    </div>
-
-    <div id="footer">
-        <div class="container">
-            <div class="row">
-                @include('modules.footer')
+        <div id="footer">
+            <div class="container">
+                <div class="row">
+                    @include('modules.footer')
+                </div>
             </div>
         </div>
     </div>
+
 
 
     <script src="/js/app.js"></script>

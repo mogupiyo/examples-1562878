@@ -16,7 +16,7 @@
                 </div>
             </form>
             @if (Auth::guest())
-            <li><a href="/register"><span class="">会員登録</span></a></li>
+            <li><a href="/tempregist"><span class="">会員登録</span></a></li>
             <li><a href="/login"><span class="">ログイン</span></a></li>
             @else
             <li class="dropdown">
