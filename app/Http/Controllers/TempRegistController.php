@@ -10,7 +10,7 @@ use Lang;
 use Validator;
 use App\Http\Requests;
 use App\Mail\MailManager;
-use App\MyLibs\MailManger as MailPHP;
+use App\MyLibs\MailManager as MailPHP;
 
 class TempRegistController extends Controller
 {
