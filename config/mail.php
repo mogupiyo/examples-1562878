@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'naseba-apps@chatbot.sakura.ne.jp',
-        'name' => 'naseba-apps',
+        'address' => 'info@blacklist.jp',
+        'name' => 'The Black List',
     ],
 
     /*

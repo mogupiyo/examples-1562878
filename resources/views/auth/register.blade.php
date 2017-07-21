@@ -29,9 +29,11 @@
 
                             <div class="col-md-6">
                                 @if ( old('email') )
-                                <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required disabled="disabled">
+                                <input type="text" class="form-control" value="{{ old('email') }}" required disabled="disabled">
+                                <input id="email" type="hidden" class="form-control" name="email" value="{{ old('email') }}" required>
                                 @else
-                                <input id="email" type="text" class="form-control" name="email" value="{{ $_GET['email'] }}" required>
+                                <input type="text" class="form-control" value="{{ $_GET['email'] }}" required disabled="disabled">
+                                <input id="email" type="hidden" class="form-control" name="email" value="{{ $_GET['email'] }}" required>
                                 @endif
 
                                 @if ($errors->has('email'))

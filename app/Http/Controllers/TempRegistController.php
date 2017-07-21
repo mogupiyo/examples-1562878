@@ -53,7 +53,7 @@ class TempRegistController extends Controller
             'from_jp' => \Config::get('mail.from.name'),
             'to' => $request->email,
             'subject' => '【THE BLACK LIST】会員登録へお進みください！',
-            'template' => 'emails.confirm',
+            'template' => 'emails.tempregist',
         ];
         $data = [
             'email' => $request->email,
@@ -61,10 +61,12 @@ class TempRegistController extends Controller
             'actionUrl' => \Config::get('app.url').'/register?email='.$request->email,
         ];
         try {
-            // Mail::to($options['to'])->send(new MailManager($options, $data));
-            $this->mail_manager->send($options, $data);
+            // Mail::to($options['to'])->send(new MailManager($options, $data)); TODO:メールサーバ用意したらこっち
+            $this->mail_manager->send($options, $data); // PHPから送信するのみ。返信不可。
             return redirect('/tempregist')->with([
-                'status' => 'success'
+                'status' => 'success',
+                'modal_title' => '送信完了',
+                'modal_content' => 'ご入力いただいたメールアドレスに会員登録用のURLを送信しました。',
             ]);
         } catch (\Exception $e) {
             $errorcd = 'E5001';

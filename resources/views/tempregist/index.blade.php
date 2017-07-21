@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('modules.modals.modal')
 <div class="login-space">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <!-- Invisible Bar For Adjust Indent. -->
@@ -24,6 +25,16 @@
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                         @endif
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary">
+                            送信する
+                        </button>
+                        <a class="btn btn-link" href="{{ url('/login') }}">
+                            すでにアカウントをお持ちですか？
+                        </a>
                     </div>
                 </div>
 
