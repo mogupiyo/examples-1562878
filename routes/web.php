@@ -11,27 +11,34 @@
 |
 */
 
-// Route::get('/', function () {
-//     // return view('welcome');
-// });
-
+/**************************************************************************
+* 未ログインでアクセス可能なアクション
+***************************************************************************/
+//ページ
 Route::get('/', 'TopsController@index');
 Route::get('/show/{scenario}', 'TopsController@show');
 Route::get('/show/{scenario}/story/{story}', 'TopsController@showStory');
 Route::resource('/tempregist', 'TempRegistController');
 Route::get('/error', 'ErrorsController@index');
 
+// Twitterログイン用
 Route::get('auth/twitter', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/twitter/callback', 'Auth\AuthController@handleProviderCallback');
 
+// Authログイン用
 Auth::routes();
 
+/**************************************************************************
+* ログインさえしていればアクセス可能なアクション
+***************************************************************************/
 Route::group(['middleware' => 'auth'], function () {
-
+    // ログアウト用
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
 });
 
+/**************************************************************************
+* マイページ用
+***************************************************************************/
 Route::group(['middleware' => 'auth', 'prefix' => 'mypage'], function () {
 
     Route::resource('/scenarios', 'MyPage\ScenariosController');
@@ -43,13 +50,15 @@ Route::group(['middleware' => 'auth', 'prefix' => 'mypage'], function () {
 
 });
 
-//Route::get('/home', 'HomeController@index');
-//
-//Auth::routes();
-//
-//Route::get('/home', 'HomeController@index');
-// Route::get('about', 'PagesController@about');
-//
-//Auth::routes();
-//
-//Route::get('/home', 'HomeController@index');
+/**************************************************************************
+* 管理画面用
+***************************************************************************/
+Route::group(['middleware' => 'auth', 'prefix' => 'console'], function () {
+
+    Route::get('/', 'Admin\DashboardsController@index');
+    Route::resource('/users', 'Admin\UsersController');
+    Route::resource('/categories', 'Admin\CategoriesController');
+    Route::resource('/pages', 'Admin\PagesController');
+    Route::resource('/mails', 'Admin\MailsController');
+
+});
