@@ -38,7 +38,7 @@ return [
     'twitter' => [
         'client_id' => 'G0dQxSf6nZdvklvKJlI3W6GqL',
         'client_secret' => 'Lf5weZDqn38ST9EnyWTSEjlrYnQpL7oONr9R2diH49ZEc57hM0',
-        'redirect' => \Config::get('app.url').'/auth/twitter/callback',
+        'redirect' => 'http://52.36.186.146/auth/twitter/callback',
     ],
 
 ];
