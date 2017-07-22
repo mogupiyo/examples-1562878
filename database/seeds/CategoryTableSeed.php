@@ -16,26 +16,42 @@ class CategoryTableSeed extends Seeder
             [
                 'path' => 'love',
                 'label' => '恋愛',
-            ],
+            ]
+        );
+        Category::create(
+            [
+                'path' => 'comedy',
+                'label' => 'コメディ',
+            ]
+        );
+        Category::create(
+            [
+                'path' => 'age',
+                'label' => '時代',
+            ]
+        );
+        Category::create(
+            [
+                'path' => 'drama',
+                'label' => 'ドラマ',
+            ]
+        );
+        Category::create(
+            [
+                'path' => 'suspense',
+                'label' => '推理サスペンス',
+            ]
+        );
+        Category::create(
             [
                 'path' => 'fantasy',
-                'label' => 'ファンタジー',
-            ],
+                'label' => 'SF・ファンタジー',
+            ]
+        );
+        Category::create(
             [
                 'path' => 'horror',
                 'label' => 'ホラー',
-            ],
-            [
-                'path' => 'mistery',
-                'label' => 'ミステリー',
-            ],
-            [
-                'path' => 'light-nodel',
-                'label' => 'ライトノベル',
-            ],
-            [
-                'path' => 'non-fiction',
-                'label' => 'ノンフィクション',
             ]
         );
     }
