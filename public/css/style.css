@@ -386,6 +386,7 @@ a {
         text-decoration: none;
     }
     .auth-button label {
+        color: #fff;
         padding: 7px 5px;
         margin-left: -10px;
     }

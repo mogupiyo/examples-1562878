@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterUsersAddVarious extends Migration
+class AlterUserForSocialite extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AlterUsersAddVarious extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('gender')->nullable()->after('email');
-            $table->string('birthday')->nullable()->after('gender');
+            $table->string('social_id')->nullable()->after('password');
+            $table->renameColumn('avator', 'avatar');
         });
     }
 
@@ -27,8 +27,8 @@ class AlterUsersAddVarious extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('gender');
-            $table->dropColumn('birthday');
+            $table->dropColumn('social_id');
+            $table->renameColumn('avatar', 'avator');
         });
     }
 }

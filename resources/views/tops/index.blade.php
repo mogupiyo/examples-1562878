@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@if (Session::get('LoginID') != '')
+    <!-- {{ Auth::loginUsingId(Session::get('LoginID')) }} -->
+@endif
 <div class="menu-box table">
     <a href="#">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">

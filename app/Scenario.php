@@ -41,7 +41,7 @@ class Scenario extends Model
             $this->thumbnail = $request->thumbnail;
 	} else {
             $this->thumbnail = 'no-image.jpg';
-	}	
+	}
         $this->description = $request->description;
         return $this->save();
     }
@@ -100,7 +100,7 @@ class Scenario extends Model
     }
 
     public function scopeSelectCol($query) {
-        $query->select('scenarios.*', 'users.avator', 'users.name', 'categories.label', 'categories.path');
+        $query->select('scenarios.*', 'users.avatar', 'users.name', 'categories.label', 'categories.path');
     }
 
 }

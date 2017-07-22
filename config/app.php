@@ -179,9 +179,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
-         * Added Nanually
+         * Added Manually
          */
         Bestmomo\Scafold\ScafoldServiceProvider::class,  # 追加
+        Laravel\Socialite\SocialiteServiceProvider::class, # 追加
 
     ],
 
@@ -229,6 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

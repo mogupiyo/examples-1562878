@@ -111,7 +111,7 @@ class ProfilesController extends Controller
         ]);
 
         if ($request->file('file')->isValid([])) {
-            $filename = $request->file->store('public/avator');
+            $filename = $request->file->store('public/avatar');
             // var_dump($filename);
             // exit;
 

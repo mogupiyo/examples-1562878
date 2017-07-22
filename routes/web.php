@@ -21,6 +21,9 @@ Route::get('/show/{scenario}/story/{story}', 'TopsController@showStory');
 Route::resource('/tempregist', 'TempRegistController');
 Route::get('/error', 'ErrorsController@index');
 
+Route::get('auth/twitter', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/twitter/callback', 'Auth\AuthController@handleProviderCallback');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
