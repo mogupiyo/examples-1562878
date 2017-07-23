@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
+
+    protected $user_model;
+
+    /**
+     *
+     */
+    public function __construct(User $user_model) {
+        $this->user_model = $user_model;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,11 +25,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $data = null;
+        $users = $this->user_model->getRecords();
         return view('admin.' .
                     explode('.', \Route::currentRouteName())[0] . '.' .
                     explode('.', \Route::currentRouteName())[1],
-                    compact($data)
+                    compact('users')
                 );
     }
 
@@ -89,7 +100,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->user_model->approve($id, true);
+        return redirect('/console/users');
     }
 
     /**

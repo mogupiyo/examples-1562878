@@ -158,6 +158,14 @@ a {
 /**
  * 作者の方へ、読者の方へ、関係者の方へ
  */
+.hang-navi p {
+    padding: auto;
+    min-height: 50px;
+    text-align: center;
+    margin: 0 0 30px 0;
+    border-top: 1px solid rgba(0,0,0,0.5);
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+}
 .menu-box div {
     height: 50px;
     background-color: #fff;
@@ -172,6 +180,24 @@ a {
     /*border-bottom: 5px solid rgb(0, 150, 136);*/
     border-bottom: 5px solid #222;
 }
+.special-notify div {
+    margin-top: 20px;
+}
+.special-notify div p {
+    display: inline-block;
+    text-align: left;
+    padding: 0.5em;/*文字周りの余白*/
+    /*color: #494949;/*文字色*/*/
+    background-color: #fff;/*背景色*/
+    border-left: solid 5px #fff;/*左線（実線 太さ 色）*/
+}
+.special-notify div p:first-child {
+    /*padding: 0;*/
+    padding: 0.5em;/*文字周りの余白*/
+    /*color: #494949;/*文字色*/*/
+    background-color: #2AB27B;/*背景色*/
+    border-left: solid 5px #2AB27B;/*左線（実線 太さ 色）*/
+}
 
 /**
  * ランキング & 新着、カテゴリ、その他
@@ -179,7 +205,7 @@ a {
 .rank-title div {
     height: 50px;
     background-color: #fff;
-    margin: 40px 0 10px 0;
+    margin: 10px 0 10px 0;
 }
 .rank-title div p {
     /*text-align: left;*/

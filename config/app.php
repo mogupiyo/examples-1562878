@@ -12,8 +12,8 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'THE BLACK LIST',
-    'shortname' => 'TBL',
+    'name' => 'NONクレジット',
+    'shortname' => 'NCD',
 
     /*
     |--------------------------------------------------------------------------

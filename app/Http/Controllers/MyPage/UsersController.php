@@ -2,14 +2,27 @@
 
 namespace App\Http\Controllers\MyPage;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use Auth;
 use App\User;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProfilesController extends Controller
+class UsersController extends Controller
 {
+    /**
+     * メンバ変数
+     */
+    protected $user_model;
+
+    /**
+     * Construct AuthController
+     */
+    public function __construct(User $user_model)
+    {
+        $this->user_model = $user_model;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +31,7 @@ class ProfilesController extends Controller
     public function index()
     {
         //
-        return view('profiles.index');
+        return view('users.index');
     }
 
     /**
@@ -62,7 +75,7 @@ class ProfilesController extends Controller
     public function edit($id)
     {
         //
-        return view('profiles.edit');
+        return view('users.edit');
     }
 
     /**
@@ -89,6 +102,27 @@ class ProfilesController extends Controller
     }
 
     /**
+     * 映画・TV関係者であるフラグを更新するリクエスト
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function filmRelated(Request $request)
+    {
+        try {
+            $this->user_model->updateFilmRelated(Auth::user()->id, true);
+            return redirect('/mypage/user');
+        } catch (\Exception $e) {
+            $errorcd = 'E5002';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -102,7 +136,7 @@ class ProfilesController extends Controller
             'email' => 'required|email|max:255',
             'file' => [
                 // 必須
-                'required',
+                // 'required',
                 // アップロードされたファイルであること
                 'file',
                 // 最小縦横50px 最大縦横1980px
@@ -110,23 +144,31 @@ class ProfilesController extends Controller
             ]
         ]);
 
-        if ($request->file('file')->isValid([])) {
-            $filename = $request->file->store('public/avatar');
-            // var_dump($filename);
-            // exit;
+        try {
 
             $user = User::find(auth()->id());
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->avator = basename($filename);
+            if ($request->gender != "") {
+                $user->gender = $request->gender;
+            }
+            $user->birthday = $request->birthday;
+            if ($request->file) {
+                $filename = $request->file->store('public/avatar');
+                $user->avatar = basename($filename);
+            }
+
             $user->save();
 
             return redirect('/mypage/user')->with('success', '保存しました。');
-        } else {
+        } catch (\Exception $e) {
+            $errorcd = 'E5003';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
             return redirect()
                 ->back()
                 ->withInput()
-                ->withErrors(['file' => '画像がアップロードされていないか不正なデータです。']);
+                ->withErrors(['file' => \Lang::get("errors.{$errorcd}")]);
         }
+
     }
 }

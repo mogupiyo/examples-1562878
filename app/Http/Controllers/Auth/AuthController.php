@@ -11,18 +11,27 @@ use App\User;
 
 class AuthController extends Controller
 {
+
+    /**
+     * 新規登録かどうか
+     */
+    protected $new_regist_flg;
+
+    /**
+     * Construct AuthController
+     */
+    public function __construct()
+    {
+        $this->new_regist_flg = false;
+    }
+
     /**
      * ユーザーをTwitterの認証ページにリダイレクトする
      *
      * @return Response
      */
-    public function redirectToProvider(Request $request)
+    public function redirectToProvider()
     {
-        // var_dump($request->relation);
-        // if ($request->relation) {
-        //     var_dump("ok");
-        // }
-        // return "test";
         return Socialite::driver('twitter')->redirect();
     }
 
@@ -54,7 +63,8 @@ class AuthController extends Controller
         $authUser = $this->_findOrCreateUser($temp_user, $file_name);
 
         return redirect('/')->with([
-            'LoginID' => $authUser->id
+            'LoginID' => $authUser->id,
+            'NewRegistFlg' => $this->new_regist_flg
         ]);
     }
 
@@ -69,6 +79,8 @@ class AuthController extends Controller
         if ($user = User::where('social_id', $temp_user['id'])->first()) {
             return $user;
         }
+
+        $this->new_regist_flg = true;
 
         return User::create([
             'name' => $temp_user['name'],

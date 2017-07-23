@@ -22,8 +22,8 @@ Route::resource('/tempregist', 'TempRegistController');
 Route::get('/error', 'ErrorsController@index');
 
 // Twitterログイン用
-Route::get('auth/twitter', 'Auth\AuthController@redirectToProvider');
-Route::get('auth/twitter/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('/auth/twitter', 'Auth\AuthController@redirectToProvider');
+Route::get('/auth/twitter/callback', 'Auth\AuthController@handleProviderCallback');
 
 // Authログイン用
 Auth::routes();
@@ -43,17 +43,19 @@ Route::group(['middleware' => 'auth', 'prefix' => 'mypage'], function () {
 
     Route::resource('/scenarios', 'MyPage\ScenariosController');
     Route::resource('/scenarios/{scenario}/story', 'MyPage\StoriesController');
-    Route::resource('/user', 'MyPage\ProfilesController');
+    Route::resource('/user', 'MyPage\UsersController');
     Route::post('/scenarios/{scenario}/edit', 'MyPage\ScenariosController@editUpload');
     Route::post('/scenarios/{scenario}/story/{story}/edit', 'MyPage\StoriesController@editUpload');
-    Route::post('/upload', 'MyPage\ProfilesController@upload');
+    Route::post('/upload', 'MyPage\UsersController@upload');
+    // 映画・テレビ関係者ですかのモーダルウィンドウからのアクセス
+    Route::post('/film_related', 'MyPage\UsersController@filmRelated');
 
 });
 
 /**************************************************************************
 * 管理画面用
 ***************************************************************************/
-Route::group(['middleware' => 'auth', 'prefix' => 'console'], function () {
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'console'], function () {
 
     Route::get('/', 'Admin\DashboardsController@index');
     Route::resource('/users', 'Admin\UsersController');

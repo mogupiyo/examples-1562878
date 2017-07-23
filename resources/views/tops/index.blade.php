@@ -2,9 +2,14 @@
 
 @section('content')
 @if (Session::get('LoginID') != '')
+    <?php /* ↓↓ ここのコメントアウトは重要です ↓↓ */ ?>
     <!-- {{ Auth::loginUsingId(Session::get('LoginID')) }} -->
+    <?php /* ↑↑ ここのコメントアウトは重要です ↑↑ */ ?>
+    @if (Session::get('NewRegistFlg'))
+        @include('modules.modals.confirm_film_related')
+    @endif
 @endif
-<div class="menu-box table">
+<!-- <div class="menu-box table">
     <a href="#">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <p>作者の方へ</p>
@@ -20,7 +25,41 @@
             <p>TV・映画<br>関係者の方へ</p>
         </div>
     </a>
+</div> -->
+<!-- <div class="hang-navi">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <p>作者の方へ</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <p>読者の方へ</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <p>TV・映画<br>関係者の方へ</p>
+    </div>
+</div> -->
+@if ( count($influence_users) > 0 )
+<!-- <div class="special-notify table">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <p class="col-md-12">お知らせ 映画・TV関係者の方が会員登録をしました！</p>
+        @foreach ($influence_users as $data)
+        <p>{{ $data->name }} <span class="small">さん</span></p>
+        @endforeach
+    </div>
+</div> -->
+<div class="col-md-8 col-md-offset-2 login-box">
+    <div class="panel panel-info">
+        <div class="panel-heading">お知らせ</div>
+        <div class="panel-body">
+            映画・TV関係者の方が会員登録をしました！
+        </div>
+        <ul class="list-group">
+            @foreach ($influence_users as $data)
+            <li class="list-group-item">{{ $data->name }} <span class="small">さん</span></li>
+            @endforeach
+        </ul>
+    </div>
 </div>
+@endif
 <div class="rank-title table">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p>月間アクセスランキング</p>
@@ -82,85 +121,16 @@
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <p>ジャンル</p>
         <div class="category-left">
+            @foreach ( $categories as $data )
             <a href="#">
                 <li class="recent-post">
                     <span>
-                        恋愛
+                        {{ $data->label }}
                     </span>
                 </li>
             </a>
             <hr>
-            <a href="#">
-                <li class="recent-post">
-                    <span>
-                        コメディ
-                    </span>
-                </li>
-            </a>
-            <hr>
-            <a href="#">
-                <li class="recent-post">
-                    <span>
-                        時代
-                    </span>
-                </li>
-            </a>
-            <hr>
-            <a href="#">
-                <li class="recent-post">
-                    <span>
-                        ヒューマンドラマ
-                    </span>
-                </li>
-            </a>
-            <hr>
-            <a href="#">
-                <li class="recent-post">
-                    <span>
-                        推理サスペンス
-                    </span>
-                </li>
-            </a>
-            <hr>
-        </div>
-        <div class="category-right">
-            <a href="#">
-                <li class="recent-post">
-                    <span>
-                        SF・ファンタジー
-                    </span>
-                </li>
-            </a>
-            <hr>
-            <a href="#">
-                <li class="recent-post">
-                    <span>
-                        ホラー
-                    </span>
-                </li>
-            </a>
-            <hr>
-            <!-- <a href="#">
-                <li class="recent-post">
-                    <span>
-                    </span>
-                </li>
-            </a>
-            <hr>
-            <a href="#">
-                <li class="recent-post">
-                    <span>
-                    </span>
-                </li>
-            </a>
-            <hr>
-            <a href="#">
-                <li class="recent-post">
-                    <span>
-                    </span>
-                </li>
-            </a>
-            <hr> -->
+            @endforeach
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">

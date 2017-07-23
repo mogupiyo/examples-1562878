@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Scenario;
 use App\Category;
 use App\Story;
+use App\User;
 
 class TopsController extends Controller
 {
@@ -17,15 +18,17 @@ class TopsController extends Controller
     protected $scenario_model;
     protected $category_model;
     protected $story_model;
+    protected $user_model;
 
     /**
      * Construct ScenariosController
      */
-    public function __construct(Scenario $scenario_model, Category $category_model, Story $story_model)
+    public function __construct(Scenario $scenario_model, Category $category_model, Story $story_model, User $user_model)
     {
         $this->scenario_model = $scenario_model;
         $this->category_model = $category_model;
         $this->story_model = $story_model;
+        $this->user_model = $user_model;
     }
 
     /**
@@ -38,7 +41,8 @@ class TopsController extends Controller
         $scenarios = $this->scenario_model->getRecords();
         $scenario_ranks = $this->scenario_model->getRecords(5);
         $categories = $this->category_model->getRecords();
-        $data = compact('scenarios', 'scenario_ranks', 'categories');
+        $influence_users = $this->user_model->getInfluenceUsers();
+        $data = compact('scenarios', 'scenario_ranks', 'categories', 'influence_users');
         return view('tops.index', $data);
     }
 

@@ -1,7 +1,7 @@
 <div class="row header-navi">
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nav-left">
         <p class="site-catch">脚本投稿サイト</p>
-        <p class="site-title">THE BLACK LIST</p>
+        <p class="site-title">{{ Config::get('app.name') }}</p>
         <!-- <img src="/img/sample_logo.png" alt=""> -->
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nav-right">

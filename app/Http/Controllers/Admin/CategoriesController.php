@@ -5,8 +5,20 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Category;
+
 class CategoriesController extends Controller
 {
+
+    protected $category_model;
+
+    /**
+     *
+     */
+    public function __construct(Category $category_model) {
+        $this->category_model = $category_model;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,11 +26,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $data = null;
+        $categories = $this->category_model->getRecords();
         return view('admin.' .
                     explode('.', \Route::currentRouteName())[0] . '.' .
                     explode('.', \Route::currentRouteName())[1],
-                    compact($data)
+                    compact('categories')
                 );
     }
 
@@ -29,11 +41,10 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        $data = null;
         return view('admin.' .
                     explode('.', \Route::currentRouteName())[0] . '.' .
                     explode('.', \Route::currentRouteName())[1],
-                    compact($data)
+                    compact('')
                 );
     }
 
@@ -45,7 +56,8 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = $this->category_model->addRecord($request);
+        return redirect('/console/categories');
     }
 
     /**
@@ -56,12 +68,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $data = null;
-        return view('admin.' .
-                    explode('.', \Route::currentRouteName())[0] . '.' .
-                    explode('.', \Route::currentRouteName())[1],
-                    compact($data)
-                );
+        // unused
     }
 
     /**
@@ -72,11 +79,11 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $data = null;
+        $category = $this->category_model->getRecordById($id);
         return view('admin.' .
                     explode('.', \Route::currentRouteName())[0] . '.' .
                     explode('.', \Route::currentRouteName())[1],
-                    compact($data)
+                    compact('category')
                 );
     }
 
@@ -89,7 +96,8 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = $this->category_model->updateRecordById($request, $id);
+        return redirect('/console/categories');
     }
 
     /**
@@ -100,6 +108,7 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = $this->category_model->deleteRecordById($id);
+        return redirect('/console/categories');
     }
 }
