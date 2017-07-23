@@ -5,3 +5,17 @@
   background-color: #ccc;
   border: 1px solid #ccc;
 }
+
+table tr td.col-md-5 input {
+    padding: 5px;
+    width: 100%;
+}
+table tr td.col-md-1 {
+    text-align: center;
+}
+table tr td.col-md-1 button {
+    width: 100%;
+}
+table thead {
+    font-weight: bold;
+}
