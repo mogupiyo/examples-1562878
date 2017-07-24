@@ -27,7 +27,7 @@
 					@if ( (($loop->index + 1) % 4) === 0 && ($loop->index + 1) < 20)
 					<li class="list-group-item" style="padding:10px;">
 						<!-- @include('modules.advertise.ad_inview_article') -->
-						<img src="/storage/banner-sample.jpg" style="width: 100%;" alt="">
+						<img src="/storage/banner-sample.png" style="width: 100%;" alt="">
 					</li>
 					@endif
 					@endforeach
