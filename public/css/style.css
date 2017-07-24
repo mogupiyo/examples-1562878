@@ -59,11 +59,14 @@ a {
  */
 .navbar {
     border-radius: 0;
-    padding: 20px 0;
+    padding: 20px 0 0 0;
     /*min-height: 200px;*/
 }
 .navbar div {
     height: 100%;
+}
+.navbar-inverse {
+    margin-bottom: 30px;
 }
 .header-navi {
     color: #fff;
@@ -72,13 +75,10 @@ a {
     color: #fff;
 }
 .nav-left {
-    /*margin-top: 120px;*/
     padding: 0 20px;
 }
 .nav-right {
-    /*padding: 50px 0;*/
     text-align: center;
-    /*margin-top: 120px;*/
 }
 .nav-right div {
     padding: 5px;
@@ -86,16 +86,16 @@ a {
 .site-catch {
     margin: 0;
     padding: 0;
-    /*margin-top: 50px;*/
+}
+.site-title a {
+    color: #fff;
+    text-decoration: none;
 }
 .site-title {
     margin: 0;
     padding: 0;
-    font-size: 20px;
+    font-size: 44px;
     font-weight: bold;
-}
-.navbar-inverse {
-    margin-bottom: 0px;
 }
 #post-scenario {
     display: none;
@@ -110,6 +110,26 @@ a {
 }
 #search-box {
     display: none;
+}
+.navfooter {
+    margin: 5px 5px 15px 5px;
+    width: calc(100% - 10px);
+}
+.navfooter a div {
+    display: table;
+    color: #fff;
+    padding: 5px;
+    font-size: 12px;
+    text-align: center;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+.navfooter a div:hover {
+    background-color: #fff;
+    color: #000;
+}
+.navfooter a div p {
+    display: table-cell;
 }
 
 /**
@@ -328,8 +348,17 @@ a {
         font-size: 16px;
         height: 60px;
     }
-    .navbar-inverse {
-        margin-bottom: 20px;
+    .navfooter {
+        margin: 5px 5px 15px 5px;
+        width: calc(100% - 10px);
+    }
+    .navfooter a div {
+        color: #fff;
+        padding: 5px;
+        text-align: center;
+        margin-top: 4px;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #fff;
     }
     #footer {
         height: 280px;
@@ -370,8 +399,17 @@ a {
         font-size: 16px;
         height: 60px;
     }
-    .navbar-inverse {
-        margin-bottom: 20px;
+    .navfooter {
+        margin: 5px 5px 15px 5px;
+        width: calc(100% - 24px);
+    }
+    .navfooter a div {
+        color: #fff;
+        padding: 5px;
+        text-align: center;
+        margin-top: 4px;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #fff;
     }
     #footer {
         height: 250px;
@@ -442,8 +480,18 @@ a {
         font-size: 16px;
         height: 60px;
     }
-    .navbar-inverse {
-        margin-bottom: 20px;
+    .navfooter {
+        margin: 5px 5px 15px 5px;
+        width: calc(100% - 24px);
+    }
+    .navfooter a div {
+        display: table;
+        color: #fff;
+        padding: 5px;
+        font-size: 12px;
+        text-align: center;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #fff;
     }
     #footer {
         height: 212px;

@@ -1,10 +1,10 @@
 <div class="row header-navi">
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nav-left">
-        <p class="site-catch">{{ Config::get('app.caption') }}</p>
-        <p class="site-title"><a href="/">{{ Config::get('app.name') }}</a></p>
+        <p class="site-catch">脚本投稿サイト</p>
+        <p class="site-title">{{ Config::get('app.name') }}</p>
         <!-- <img src="/img/sample_logo.png" alt=""> -->
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-6 nav-right">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nav-right">
         <div class="col-md-12 menu-control" style="padding: 0;">
             <div id="search-box" class="col-md-6 col-md-offset-2" style="padding: 0;">
                 <form class="">
@@ -50,15 +50,19 @@
                                 <a href="{{ url('/mypage/user') }}">プロフィール</a>
                             </li>
                             <li>
-                                <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                                <a href="{{ url('/logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                ログアウト
+                            </a>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
             @endif
         </div>
         <div id="post-scenario" class="col-md-6 col-md-offset-2">
@@ -67,21 +71,7 @@
             </button>
         </div>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navfooter">
-        <a href="#">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <p>作者の方へ</p>
-            </div>
-        </a>
-        <a href="#">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <p>読者の方へ</p>
-            </div>
-        </a>
-        <a href="#">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <p>関係者の方へ</p>
-            </div>
-        </a>
+    <div class="col-md-12 navfooter" style="background: rgba(1,1,1,0.5);">
+        テスト
     </div>
 </div>

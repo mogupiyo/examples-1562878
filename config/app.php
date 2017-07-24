@@ -12,8 +12,9 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'NONクレジット',
+    'name' => 'TestSite',
     'shortname' => 'NCD',
+    'caption' => 'サンプル投稿サイト',
 
     /*
     |--------------------------------------------------------------------------

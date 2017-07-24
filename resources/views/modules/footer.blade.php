@@ -34,7 +34,7 @@
             </a>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 small copyright">
-            <p>Copyright &copy; {{ date("Y") }} THE BLACK LIST All Rights Reserved.</p>
+            <p>Copyright &copy; {{ date("Y") }} {{ Config::get('app.name') }} All Rights Reserved.</p>
         </div>
     </div>
 </div>
