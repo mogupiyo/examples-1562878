@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Log;
 use App\Scenario;
 use App\Category;
-use Illuminate\Support\Facades\Log;
+use App\Story;
 
 class ScenariosController extends Controller
 {
@@ -20,10 +21,11 @@ class ScenariosController extends Controller
     /**
      * Construct ScenariosController
      */
-    public function __construct(Scenario $scenario_model, Category $category_model)
+    public function __construct(Scenario $scenario_model, Category $category_model, Story $story_model)
     {
         $this->scenario_model = $scenario_model;
         $this->category_model = $category_model;
+        $this->story_model = $story_model;
     }
 
     /**
@@ -31,10 +33,12 @@ class ScenariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $scenarios = $this->scenario_model->getRecords();
-        $data = compact('scenarios');
+        $scenarios = $this->scenario_model->getRecords(20, $request->keyword);
+        $scenario_ranks = $this->scenario_model->getRecords(10);
+        $categories = $this->category_model->getRecords();
+        $data = compact('scenarios', 'scenario_ranks', 'categories');
         return view('scenarios.index', $data);
     }
 
@@ -45,9 +49,7 @@ class ScenariosController extends Controller
      */
     public function create()
     {
-        $categories = $this->category_model->getRecords();
-        $data = compact('categories');
-        return view('scenarios.create', $data);
+        return redirect('/scenarios');
     }
 
     /**
@@ -58,40 +60,7 @@ class ScenariosController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'description' => 'required|max:255',
-            'category_id' => 'required',
-            'content' => 'required',
-            'file' => [
-                // 必須
-                'required',
-                // アップロードされたファイルであること
-                'file',
-                // 最小縦横50px 最大縦横1980px
-                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980',
-            ]
-        ]);
-
-        if ($request->file('file')->isValid([])) {
-            $filename = $request->file->store('public/thumbnail');
-            if ($filename) {
-                $request->merge(['thumbnail' => basename($filename)]);
-            }
-            try {
-                $this->scenario_model->addRecord($request);
-            } catch (\Exception $e) {
-                Log::error('データ取得に失敗しました。', [$e]);
-            }
-
-
-            return redirect('/mypage/scenarios/')->with('success', '保存しました。');
-        } else {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors(['file' => '不正な画像データです。']);
-        }
+        return redirect('/scenarios');
     }
 
     /**
@@ -103,8 +72,10 @@ class ScenariosController extends Controller
     public function show($id)
     {
         $scenario = $this->scenario_model->getRecordById($id);
+        $scenario_ranks = $this->scenario_model->getRecords(5);
         $categories = $this->category_model->getRecords();
-        $data = compact('categories', 'scenario');
+        $stories = $this->story_model->getRecordsById($id);
+        $data = compact('categories', 'scenario', 'scenario_ranks', 'stories');
         return view('scenarios.show', $data);
     }
 
@@ -116,45 +87,7 @@ class ScenariosController extends Controller
      */
     public function edit($id)
     {
-        $scenario = $this->scenario_model->getRecordById($id);
-        $categories = $this->category_model->getRecords();
-        $data = compact('categories', 'scenario');
-        return view('scenarios.edit', $data);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function editUpload(Request $request, $id)
-    {
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'description' => 'required|max:255',
-            'category_id' => 'required',
-            'content' => 'required',
-            'file' => [
-                // 必須
-                // 'required',
-                // アップロードされたファイルであること
-                'file',
-                // 最小縦横50px 最大縦横1980px
-                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980',
-            ]
-        ]);
-
-        if ($request->file) {
-            $filename = $request->file->store('public/thumbnail');
-            if ($filename) {
-                $request->merge(['thumbnail' => basename($filename)]);
-            }
-        }
-        $this->scenario_model->updateRecord($request, $id);
-
-        return redirect('/mypage/scenarios/')->with('success', '保存しました。');
+        return redirect('/scenarios');
     }
 
     /**
@@ -165,6 +98,6 @@ class ScenariosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect('/scenarios');
     }
 }

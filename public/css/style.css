@@ -148,13 +148,15 @@ a {
 .link-items a div {
     /*margin-top: 10px;*/
     /*border-bottom: 1px solid #fff;*/
-    padding: 5px;
+    padding: 5px 0;
+    /*text-align: left !important;*/
 }
 .link-items a {
     color: #fff;
 }
 .copyright {
-    margin: 50px 0;
+    /*margin: 50px 0;*/
+    padding: 40px 0;
 }
 
 /**
@@ -167,6 +169,12 @@ a {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+}
+ul.inner {
+    margin: 0;
+}
+ul.inner li {
+    border: none;
 }
 
 /******************************
@@ -256,6 +264,11 @@ a {
 .ad-box div {
     margin: 50px 0 50px 0;
 }
+.ad-sidebar {
+    height:100px;
+    padding:20px 0;
+}
+
 
 /**
  * フォロースペース
@@ -389,6 +402,10 @@ a {
     #search-box {
         display: block;
     }
+    .ad-sidebar {
+        height:100px;
+        padding:20px 0;
+    }
 }
 
 @media (min-width: 992px)
@@ -469,6 +486,10 @@ a {
     }
     #search-box {
         display: block;
+    }
+    .ad-sidebar {
+        height:220px;
+        padding:20px 0;
     }
 }
 
@@ -554,4 +575,9 @@ a {
     #search-box {
         display: block;
     }
+    .ad-sidebar {
+        height:300px;
+        padding:20px 0;
+    }
+
 }

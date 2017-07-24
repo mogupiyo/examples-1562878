@@ -232,7 +232,6 @@ button.accordion.active:after {
 }
 .story-box div.story-scene {
     width: 10%;
-    min-width: 75px;
     /*text-align: center;*/
 }
 .story-box div.story-thumbnail {
@@ -262,10 +261,6 @@ button.accordion.active:after {
     text-align: left;
 }
 
-.container {
-    /*background-color: #fff;*/
-}
-
 </style>
 
 <section id="blog-section" >
@@ -273,59 +268,7 @@ button.accordion.active:after {
         <div class="row">
             <div class="col-lg-8">
                 <div class="row" style="margin-top: 10px; padding: 20px;">
-
-                    <div class="form-group">
-                        <p><img class="cover" src="/storage/thumbnail/{{ $scenario->thumbnail }}" style="width: 100%;"></p>
-                    </div>
-                    <div class="form-group">
-                        {{ $errors->first('title') }}
-                        <label for="exampleInputEmail1" class='control-label'>タイトル</label>
-                        <p>{{ $scenario->title }}</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="descTextarea" class='control-label'>概要</label>
-                        <p>{{ $scenario->description }}</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleCategory" class='control-label'>カテゴリ</label>
-                        <p>{{ $scenario->label }}</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="contentTextarea" class='control-label'>ストーリー</label>
-                        @foreach ($stories as $data)
-                        <div class="story-box">
-                            <div class="story-scene title-text">
-                                <span>{{ $data->scene }}</span>
-                            </div>
-                            <div class="story-thumbnail">
-                                <span><img src="/storage/stories/{{ $data->thumbnail }}" alt="{{ $data->scene }}{{ $data->topic }}"></span>
-                            </div>
-                            <div class="story-topic">
-                                {{ $data->topic }}
-                            </div>
-                            <div class="story-control">
-                                <a href="/show/{{ $scenario->id }}/story/{{ $data->id }}">
-                                    <button type="button" class="btn btn-success">
-                                        読む
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-                        @if (count($stories) === 0)
-                        <div class="serch-message-area" style="margin: 10px 0 20px 0; border-bottom: 1px solid rgba(0,0,0,0.3); border-top: 1px solid rgba(0,0,0,0.3);">
-                            <h4 class="title text-success">「{{ $scenario->name }}」さんが最初のストーリーを執筆中です！お楽しみに！</h4>
-                        </div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <a href="/">
-                            <button type="button" class="btn btn-primary">
-                                戻る
-                            </button>
-                        </a>
-                    </div>
-
+                    @include('modules.story', ['story' => $story, 'scenario' => $scenario])
                 </div>
             </div>
 

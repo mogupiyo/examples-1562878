@@ -7,9 +7,9 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-6 nav-right">
         <div class="col-md-12 menu-control" style="padding: 0;">
             <div id="search-box" class="col-md-6 col-md-offset-2" style="padding: 0;">
-                <form class="">
+                <form method="GET" action="/scenarios">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" name="keyword" class="form-control" placeholder="Search">
                         <div class="input-group-btn" style="padding: 0;">
                             <button class="btn btn-success" type="submit">
                                 <span>検索</span>

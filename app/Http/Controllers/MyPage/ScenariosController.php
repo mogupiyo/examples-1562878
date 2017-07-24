@@ -39,7 +39,7 @@ class ScenariosController extends Controller
     {
         $scenarios = $this->scenario_model->getMyRecords();
         $data = compact('scenarios');
-        return view('scenarios.index', $data);
+        return view('mypage.scenarios.index', $data);
     }
 
     /**
@@ -51,7 +51,7 @@ class ScenariosController extends Controller
     {
         $categories = $this->category_model->getRecords();
         $data = compact('categories');
-        return view('scenarios.create', $data);
+        return view('mypage.scenarios.create', $data);
     }
 
     /**
@@ -103,7 +103,7 @@ class ScenariosController extends Controller
         $categories = $this->category_model->getRecords();
         $stories = $this->story_model->getRecordsById($id);
         $data = compact('categories', 'scenario', 'stories');
-        return view('scenarios.show', $data);
+        return view('mypage.scenarios.show', $data);
     }
 
     /**
@@ -117,7 +117,7 @@ class ScenariosController extends Controller
         $scenario = $this->scenario_model->getRecordById($id);
         $categories = $this->category_model->getRecords();
         $data = compact('categories', 'scenario');
-        return view('scenarios.edit', $data);
+        return view('mypage.scenarios.edit', $data);
     }
 
     /**

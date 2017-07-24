@@ -15,13 +15,13 @@ class Scenario extends Model
                     ->first();
     }
 
-    public function getRecords($limit = null) {
+    public function getRecords($paging = null, $keyword = null) {
         return $this::JoinCategories()
                     ->JoinUsers()
                     ->SelectCol()
+                    ->FindData($keyword)
                     ->Desc()
-                    ->Limit($limit)
-                    ->get();
+                    ->paginate($paging);
     }
 
     public function getMyRecords() {
@@ -37,11 +37,11 @@ class Scenario extends Model
         $this->user_id = Auth::user()->id;
         $this->title = $request->title;
         $this->category_id = $request->category_id;
-	if($request->thumbnail){
+        if($request->thumbnail){
             $this->thumbnail = $request->thumbnail;
-	} else {
+        } else {
             $this->thumbnail = 'no-image.jpg';
-	}
+        }
         $this->description = $request->description;
         return $this->save();
     }
@@ -69,6 +69,12 @@ class Scenario extends Model
         return $this::where('id', $id)
                     ->where('user_id', Auth::user()->id)
                     ->delete();
+    }
+
+    public function scopeFindData($query, $keyword = null) {
+        $query->where('scenarios.title', 'like', "%$keyword%")
+              ->orWhere('scenarios.description', 'like', "%$keyword%")
+              ->orWhere('users.name', 'like', "%$keyword%");
     }
 
     public function scopeLimit($query, $limit = null) {
