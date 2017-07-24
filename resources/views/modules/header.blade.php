@@ -62,9 +62,11 @@
             @endif
         </div>
         <div id="post-scenario" class="col-md-6 col-md-offset-2">
-            <button type="button" class="btn btn-primary col-md-10" name="button">
-                脚本を投稿する
-            </button>
+            <a href="/mypage/scenarios/create">
+                <button type="button" class="btn btn-primary col-md-10" name="button">
+                    脚本を投稿する
+                </button>
+            </a>
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navfooter">
