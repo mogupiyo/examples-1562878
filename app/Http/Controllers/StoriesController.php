@@ -9,6 +9,7 @@ use App\Scenario;
 use App\Category;
 use App\Story;
 use App\User;
+use App\DailyViewLog as DPV; // Scenario Page View
 
 class StoriesController extends Controller
 {
@@ -19,16 +20,18 @@ class StoriesController extends Controller
     protected $category_model;
     protected $story_model;
     protected $user_model;
+    protected $dpv_model;
 
     /**
      * Construct ScenariosController
      */
-    public function __construct(Scenario $scenario_model, Category $category_model, Story $story_model, User $user_model)
+    public function __construct(Scenario $scenario, Category $category, Story $story, User $user, DPV $dpv)
     {
-        $this->scenario_model = $scenario_model;
-        $this->category_model = $category_model;
-        $this->story_model = $story_model;
-        $this->user_model = $user_model;
+        $this->scenario_model = $scenario;
+        $this->category_model = $category;
+        $this->story_model = $story;
+        $this->user_model = $user;
+        $this->dpv_model = $dpv;
     }
 
     /**
@@ -38,7 +41,7 @@ class StoriesController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -48,7 +51,7 @@ class StoriesController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -59,7 +62,7 @@ class StoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -70,15 +73,20 @@ class StoriesController extends Controller
      */
     public function show($scenario_id, $story_id)
     {
-        $scenario = $this->scenario_model->getRecordById($scenario_id);
-        $scenario_ranks = $this->scenario_model->getRecords(5);
-        $categories = $this->category_model->getRecords();
-        $story = $this->story_model->getRecordById($story_id);
-        // var_dump($story);
-        // foreach ($story as $data) {
-        //     var_dump($data);
-        // }
-        // exit;
+        try {
+            $this->dpv_model->addRecord($story_id, 'story');
+            $scenario = $this->scenario_model->getRecordById($scenario_id);
+            $scenario_ranks = $this->scenario_model->getRecords(5);
+            $categories = $this->category_model->getRecords();
+            $story = $this->story_model->getRecordById($story_id);
+        } catch (\Exception $e) {
+            $errorcd = 'E5101';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
         $data = compact('categories', 'scenario', 'scenario_ranks', 'story');
         return view('stories.show', $data);
     }
@@ -91,7 +99,7 @@ class StoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -103,7 +111,7 @@ class StoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -114,6 +122,6 @@ class StoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->back();
     }
 }

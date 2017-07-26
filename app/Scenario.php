@@ -33,6 +33,10 @@ class Scenario extends Model
                     ->get();
     }
 
+    public function pageview() {
+        return $this->hasMany('App\DailyViewLog');
+    }
+
     public function addRecord($request) {
         $this->user_id = Auth::user()->id;
         $this->title = $request->title;

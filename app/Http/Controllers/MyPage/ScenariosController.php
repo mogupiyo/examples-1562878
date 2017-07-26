@@ -67,12 +67,8 @@ class ScenariosController extends Controller
             'description' => 'required|max:255',
             'category_id' => 'required',
             'file' => [
-                // 必須
-                // 'required',
-                // アップロードされたファイルであること
-                'file',
-                // 最小縦横50px 最大縦横1980px
-                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980',
+                'file', // アップロードされたファイルであること
+                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980', // 最小縦横50px 最大縦横1980px
             ]
         ]);
 
@@ -81,11 +77,17 @@ class ScenariosController extends Controller
             if ($filename) {
                 $request->merge(['thumbnail' => basename($filename)]);
             }
-	}
+        }
+
         try {
             $this->scenario_model->addRecord($request);
         } catch (\Exception $e) {
-            Log::error('データ取得に失敗しました。', [$e]);
+            $errorcd = 'E5101';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
         }
 
        return redirect('/mypage/scenarios')->with('success', '保存しました。');

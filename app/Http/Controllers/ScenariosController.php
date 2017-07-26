@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Scenario;
 use App\Category;
 use App\Story;
+use App\DailyViewLog as DPV; // Scenario Page View
 
 class ScenariosController extends Controller
 {
@@ -17,15 +18,17 @@ class ScenariosController extends Controller
      */
     protected $scenario_model;
     protected $category_model;
+    protected $dpv_model;
 
     /**
      * Construct ScenariosController
      */
-    public function __construct(Scenario $scenario_model, Category $category_model, Story $story_model)
+    public function __construct(Scenario $scenario, Category $category, Story $story, DPV $dpv)
     {
-        $this->scenario_model = $scenario_model;
-        $this->category_model = $category_model;
-        $this->story_model = $story_model;
+        $this->scenario_model = $scenario;
+        $this->category_model = $category;
+        $this->story_model = $story;
+        $this->dpv_model = $dpv;
     }
 
     /**
@@ -35,9 +38,19 @@ class ScenariosController extends Controller
      */
     public function index(Request $request)
     {
-        $scenarios = $this->scenario_model->getRecords(20, $request->keyword);
-        $scenario_ranks = $this->scenario_model->getRecords(10);
-        $categories = $this->category_model->getRecords();
+        try {
+            $scenarios = $this->scenario_model->getRecords(20, $request->keyword);
+            $scenario_ranks = $this->scenario_model->getRecords(10);
+            $categories = $this->category_model->getRecords();
+        } catch (\Exception $e) {
+            $errorcd = 'E5201';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+
         $data = compact('scenarios', 'scenario_ranks', 'categories');
         return view('scenarios.index', $data);
     }
@@ -71,10 +84,21 @@ class ScenariosController extends Controller
      */
     public function show($id)
     {
-        $scenario = $this->scenario_model->getRecordById($id);
-        $scenario_ranks = $this->scenario_model->getRecords(5);
-        $categories = $this->category_model->getRecords();
-        $stories = $this->story_model->getRecordsById($id);
+        try {
+            $this->dpv_model->addRecord($id, 'scenario');
+            $scenario = $this->scenario_model->getRecordById($id);
+            $scenario_ranks = $this->scenario_model->getRecords(5);
+            $categories = $this->category_model->getRecords();
+            $stories = $this->story_model->getRecordsById($id);
+        } catch (\Exception $e) {
+            $errorcd = 'E5201';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+
         $data = compact('categories', 'scenario', 'scenario_ranks', 'stories');
         return view('scenarios.show', $data);
     }

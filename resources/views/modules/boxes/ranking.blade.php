@@ -8,7 +8,7 @@
             </div>
         </a>
         <div class="text-right border-bottom">
-            @include('modules.badges.view', [ 'item' => rand(5, 1000) ])
+            @include('modules.badges.view', [ 'item' => count($data->pageview) ])
             @include('modules.badges.user', [ 'item' => $data->name ])
         </div>
     </li>

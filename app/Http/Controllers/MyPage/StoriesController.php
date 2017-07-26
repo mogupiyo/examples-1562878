@@ -31,8 +31,7 @@ class StoriesController extends Controller
      */
     public function index()
     {
-        //
-        return "show";
+        return redirect()->back();
     }
 
     /**
@@ -54,19 +53,13 @@ class StoriesController extends Controller
      */
     public function store(Request $request, $id)
     {
-        // var_dump("ok");
-        // exit;
         $this->validate($request, [
             'scene' => 'required|max:255',
             'topic' => 'required|max:255',
             'episode' => 'required',
             'file' => [
-                // 必須
-                // 'required',
-                // アップロードされたファイルであること
-                'file',
-                // 最小縦横50px 最大縦横1980px
-                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980',
+                'file', // アップロードされたファイルであること
+                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980', // 最小縦横50px 最大縦横1980px
             ]
         ]);
 
@@ -76,14 +69,16 @@ class StoriesController extends Controller
                 $request->merge(['thumbnail' => basename($filename)]);
             }
         }
-        // echo "<pre>";
-        // var_dump($request->thumbnail);
-        // echo "</pre>";
-        // exit;
+
         try {
             $this->story_model->addRecord($request, $id);
         } catch (\Exception $e) {
-            Log::error('データ登録に失敗しました。', [$e]);
+            $errorcd = 'E5202';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
         }
         return redirect("/mypage/scenarios/{$id}")->with('success', '保存しました。');
     }
@@ -126,12 +121,8 @@ class StoriesController extends Controller
             'topic' => 'required|max:255',
             'episode' => 'required',
             'file' => [
-                // 必須
-                // 'required',
-                // アップロードされたファイルであること
-                'file',
-                // 最小縦横50px 最大縦横1980px
-                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980',
+                'file', // アップロードされたファイルであること
+                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980', // 最小縦横50px 最大縦横1980px
             ]
         ]);
 
@@ -141,7 +132,17 @@ class StoriesController extends Controller
                 $request->merge(['thumbnail' => basename($filename)]);
             }
         }
-        $this->story_model->updateRecord($request, $scenario_id, $story_id);
+
+        try {
+            $this->story_model->updateRecord($request, $scenario_id, $story_id);
+        } catch (\Exception $e) {
+            $errorcd = 'E5203';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
 
         return redirect("/mypage/scenarios/{$scenario_id}")->with('success', '保存しました。');
     }
@@ -157,18 +158,20 @@ class StoriesController extends Controller
         #############################################################
         # データの削除を実行。
         #############################################################
-        $result = $this->story_model->deleteRecord($story_id);
-        if($result){
-            // 削除成功
-            return redirect("/mypage/scenarios/{$scenario_id}")->with([
-                'result_message' => 'データの削除が完了しました。',
-                'result_status' => 'success',
+        try {
+            $result = $this->story_model->deleteRecord($story_id);
+        } catch (\Exception $e) {
+            $errorcd = 'E5204';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
             ]);
         }
-        // 削除失敗
-        return redirect("actions/")->with([
-            'result_message' => 'データの削除に失敗しました。',
-            'result_status' => 'failed',
+        // 削除成功
+        return redirect("/mypage/scenarios/{$scenario_id}")->with([
+            'result_message' => 'データの削除が完了しました。',
+            'result_status' => 'success',
         ]);
     }
 }
