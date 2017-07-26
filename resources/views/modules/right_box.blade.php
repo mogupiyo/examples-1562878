@@ -12,18 +12,15 @@
         <div class="content-widget-sidebar">
             <ul class="list-group outer">
                 @foreach ($scenario_ranks as $data)
-                <li class="list-group-item" style="padding:0;">
-                    <ul class="list-group inner">
-                        <li class="list-group-item">
-                            <a href="/scenarios/{{ $data->id }}">{{ $loop->index + 1 }}位 {{ $data->title }}</a>
-                        </li>
-                        <li class="list-group-item" style="min-height: 42px;">
-                            <span class="badge">{{ date("m/d", strtotime($data->created_at)) }}</span>
-                            <span class="badge">作: {{ $data->name }}</span>
-                        </li>
-                    </ul>
+                <li class="list-group-item">
+                    <div class="">
+                        <a href="/scenarios/{{ $data->id }}">{{ $loop->index + 1 }}位 {{ $data->title }}</a>
+                    </div>
+                    <div class="text-right">
+                        @include('modules.badges.user', [ 'item' => $data->name ])
+                        @include('modules.badges.date', [ 'item' => $data->created_at ])
+                    </div>
                 </li>
-                <hr>
                 @endforeach
             </ul>
         </div>
@@ -38,18 +35,15 @@
         <div class="content-widget-sidebar">
             <ul class="list-group outer">
                 @foreach ($scenario_ranks as $data)
-                <li class="list-group-item" style="padding:0;">
-                    <ul class="list-group inner">
-                        <li class="list-group-item">
-                            <a href="/scenarios/{{ $data->id }}">{{ $data->title }}</a>
-                        </li>
-                        <li class="list-group-item" style="min-height: 42px;">
-                            <span class="badge">{{ date("m/d", strtotime($data->created_at)) }}</span>
-                            <span class="badge">作: {{ $data->name }}</span>
-                        </li>
-                    </ul>
+                <li class="list-group-item">
+                    <div class="">
+                        <a href="/scenarios/{{ $data->id }}">{{ $data->title }}</a>
+                    </div>
+                    <div class="text-right">
+                        @include('modules.badges.user', [ 'item' => $data->name ])
+                        @include('modules.badges.date', [ 'item' => $data->created_at ])
+                    </div>
                 </li>
-                <hr>
                 @endforeach
             </ul>
         </div>

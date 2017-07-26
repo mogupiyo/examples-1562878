@@ -1,0 +1,23 @@
+<p>{{ $section_title }}</p>
+@foreach ($items as $data)
+<ul style="padding: 0;">
+    <li class="recent-post" style="padding: 0;">
+        <a href="/scenarios/{{ $data->id }}">
+            <div class="rank-scenario-title">
+                <span>{{ $loop->index + 1 }}位 {{ $data->title }}</span>
+            </div>
+        </a>
+        <div class="text-right border-bottom">
+            @include('modules.badges.view', [ 'item' => rand(5, 1000) ])
+            @include('modules.badges.user', [ 'item' => $data->name ])
+        </div>
+    </li>
+</ul>
+@endforeach
+@if (isset($more_link))
+<a href="{{ $more_link }}">
+    <li class="recent-post">
+        ...もっとみる
+    </li>
+</a>
+@endif

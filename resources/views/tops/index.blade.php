@@ -11,7 +11,7 @@
 @endif
 
 @if ( count($influence_users) > 0 )
-<div class="col-md-8 col-md-offset-2 login-box">
+<div class="col-md-8 col-md-offset-2 notification-box">
     <div class="panel panel-info">
         <div class="panel-heading">お知らせ</div>
         <div class="panel-body">
@@ -33,88 +33,41 @@
 </div>
 <div class="ranking">
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <p>ドラマ部門</p>
-        @foreach ($scenario_ranks as $data)
-        <a href="/scenarios/{{ $data->id }}">
-            <li class="recent-post">
-                <span>
-                    {{ $loop->index + 1 }}位 {{ $data->title }} <span class="small">(作:{{ $data->name }})</span>
-                </span>
-            </li>
-        </a>
-        <hr>
-        @endforeach
-        <a href="/scenarios?category=drama">
-            <li class="recent-post">
-                ...もっとみる
-            </li>
-        </a>
+        @include('modules.boxes.ranking', [
+            'section_title' => 'ドラマ部門',
+            'items' => $scenario_ranks,
+            'more_link' => '/scenarios?category=drama',
+        ])
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <p>映画部門</p>
-        @foreach ($scenario_ranks as $data)
-        <a href="/scenarios/{{ $data->id }}">
-            <li class="recent-post">
-                <span>
-                    {{ $loop->index + 1 }}位 {{ $data->title }} <span class="small">(作:{{ $data->name }})</span>
-                </span>
-            </li>
-        </a>
-        <hr>
-        @endforeach
-        <a href="/scenarios?category=film">
-            <li class="recent-post">
-                ...もっとみる
-            </li>
-        </a>
+        @include('modules.boxes.ranking', [
+            'section_title' => '映画部門',
+            'items' => $scenario_ranks,
+            'more_link' => '/scenarios?category=movie',
+        ])
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <p>ネット配信部門</p>
-        @foreach ($scenario_ranks as $data)
-        <a href="/scenarios/{{ $data->id }}">
-            <li class="recent-post">
-                <span>
-                    {{ $loop->index + 1 }}位 {{ $data->title }} <span class="small">(作:{{ $data->name }})</span>
-                </span>
-            </li>
-        </a>
-        <hr>
-        @endforeach
-        <a href="/scenarios?category=internet">
-            <li class="recent-post">
-                ...もっとみる
-            </li>
-        </a>
+        @include('modules.boxes.ranking', [
+            'section_title' => 'ネット配信部門',
+            'items' => $scenario_ranks,
+            'more_link' => '/scenarios?category=internet',
+        ])
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <?php /* invisible bar for keeping the line space */ ?>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <p>新着</p>
-        @foreach ($scenario_ranks as $data)
-        <a href="/scenarios/{{ $data->id }}">
-            <li class="recent-post">
-                <span>
-                    {{ date("m/d", strtotime($data->created_at)) }} {{ $data->title }} <span class="small">(作:{{ $data->name }})</span>
-                </span>
-            </li>
-        </a>
-        <hr>
-        @endforeach
+        @include('modules.boxes.latest', [
+            'section_title' => '新着',
+            'items' => $scenario_ranks,
+            'more_link' => '/scenarios',
+        ])
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <p>ジャンル</p>
-        <div class="category-left">
-            @foreach ( $categories as $data )
-            <a href="/scenarios?category={{ $data->path }}">
-                <li class="recent-post">
-                    <span>
-                        {{ $data->label }}
-                    </span>
-                </li>
-            </a>
-            <hr>
-            @endforeach
-        </div>
+        @include('modules.boxes.category', [
+            'section_title' => 'ジャンル',
+            'items' => $categories,
+        ])
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <p>審査通過作品</p>

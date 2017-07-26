@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet" />
 
     <!-- Scripts -->
     <script>
@@ -25,17 +26,21 @@
 <body>
 
     <div id="wrap">
-        <nav class="navbar navbar-inverse">
-            <div class="container">
+        <header>
+            <div id="header-area" class="header-area">
                 @include('modules.header')
             </div>
-        </nav>
+        </header>
 
         <div id="contents" class="container">
             <div class="row">
                 @yield('content')
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height: 100px;">
+                    <?php /* invisible bar for keeping the line space */ ?>
+                </div>
             </div>
         </div>
+
         <div id="footer">
             <div class="container">
                 <div class="row">
@@ -44,8 +49,6 @@
             </div>
         </div>
     </div>
-
-
 
     <script src="/js/app.js"></script>
 

@@ -12,8 +12,8 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'TestSite',
-    'shortname' => 'NCD',
+    'name' => 'Film Buyer',
+    'shortname' => 'FLB',
     'caption' => 'サンプル投稿サイト',
 
     /*
