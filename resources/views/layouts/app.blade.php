@@ -27,7 +27,7 @@
 
     <div id="wrap">
         <header>
-            <div id="header-area" class="header-area">
+            <div id="header-area" class="header-area container">
                 @include('modules.header')
             </div>
         </header>
@@ -41,16 +41,14 @@
             </div>
         </div>
 
-        <div id="footer">
+        <footer>
             <div class="container">
-                <div class="row">
-                    @include('modules.footer')
-                </div>
+                @include('modules.footer')
             </div>
-        </div>
+        </footer>
     </div>
 
-    <script src="/js/app.js"></script>
+    <!-- <script src="/js/app.js"></script> -->
 
 </body>
 </html>

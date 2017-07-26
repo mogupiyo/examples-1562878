@@ -62,6 +62,13 @@ button {
 *******************************/
 
 /**
+ * コンテナの一部属性をキャンセル
+ */
+.container {
+    /*padding-right: 0;*/
+}
+
+/**
  * ヘッダーナビ
  */
 .site-title {
@@ -125,7 +132,7 @@ header #header-area.header-area div {
 }
 .nav.nav-header .over div.right {
     flex: 1;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -315,28 +322,44 @@ header #header-area.header-area div {
 /**
  * フッター
  */
-#footer div div div div div p {
+footer {
+    display: block;
+    height: 300px;
     color: #fff;
+    background-color: #000;
 }
-#footer div div div div div {
-    /*padding: 20px;*/
-    text-align: center;
+footer > div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
 }
-.link-items {
-    margin-top: 50px;
+footer > div > div {
+    flex: 1;
+    display: flex;
 }
-.link-items a div {
-    /*margin-top: 10px;*/
-    /*border-bottom: 1px solid #fff;*/
-    padding: 5px 0;
-    /*text-align: left !important;*/
+footer > div > div:first-child {
+    flex: 6;
 }
-.link-items a {
+footer > div > div > div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+footer > div > div:first-child > ul {
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+footer > div > div:first-child > ul > li {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+footer > div > div:first-child > ul > li > div > a {
     color: #fff;
-}
-.copyright {
-    /*margin: 50px 0;*/
-    padding: 40px 0;
 }
 
 /**
@@ -669,6 +692,43 @@ li .category {
         height:100px;
         padding:20px 0;
     }
+    /* footer */
+    footer {
+        display: block;
+        height: 150px;
+        color: #fff;
+        background-color: #000;
+    }
+    footer > div {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+    }
+    footer > div > div {
+        flex: 1;
+        display: flex;
+    }
+    footer > div > div:first-child {
+        flex: 1;
+    }
+    footer > div > div > div {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+    footer > div > div:first-child > ul {
+        flex: 6;
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+    }
+    footer > div > div:first-child > ul > li {
+        flex: auto;
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media (min-width: 992px)
@@ -756,6 +816,9 @@ li .category {
     }
     .film-border-content {
         font-size: 16px;
+    }
+    .nav.nav-header .over div.right {
+        display: flex;
     }
 }
 
@@ -847,6 +910,9 @@ li .category {
     }
     .film-border-content {
         font-size: 16px;
+    }
+    .nav.nav-header .over div.right {
+        display: flex;
     }
 
 }

@@ -1,4 +1,4 @@
-<div class="nav nav-header container">
+<div class="nav nav-header">
     <div class="over">
         <div class="left">
             <div>
@@ -17,6 +17,7 @@
                 </form>
             </div>
             <div class="login-control">
+                @if (Auth::guest())
                 <div>
                     <button type="button" class="btn btn-primary" name="button">脚本を登録する</button>
                 </div>
@@ -26,18 +27,38 @@
                 <div>
                     <button type="button" class="btn btn-success" name="button">ログイン</button>
                 </div>
-                <!-- @if (Auth::guest())
-                <div>
-                    会員登録
-                </div>
-                <div>
-                    ログイン
-                </div>
                 @else
-                <div>
-                    ぴよぴお
+                <div style="flex: 2;">
+                    <button type="button" class="btn btn-primary" name="button">脚本を登録する</button>
                 </div>
-                @endif -->
+                <div id="auth-control" style="display: flex; justify-content: center; align-items: center; padding-top: 5px;">
+                    <ul id="login-control" class="text-center">
+                        <li class="dropdown">
+                            <a id="login-name-box" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu" style="color: #000 !important;">
+                                <li>
+                                    <a href="{{ url('/mypage/scenarios/create') }}" style="color: #000 !important;">脚本を投稿する</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/mypage/scenarios') }}" style="color: #000 !important;">自分の投稿</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/mypage/user') }}" style="color: #000 !important;">プロフィール</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: #000 !important;">ログアウト</a>
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                @endif
             </div>
         </div>
     </div>

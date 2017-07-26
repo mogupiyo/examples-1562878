@@ -1,7 +1,4 @@
 <div class="form-group">
-    <p><img class="cover" src="/storage/stories/{{ $story->thumbnail }}" style="width: 100%;"></p>
-</div>
-<div class="form-group">
     <a href="#">
         <span>TOP</span>
     </a>
