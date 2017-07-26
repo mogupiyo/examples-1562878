@@ -86,20 +86,6 @@ class StoriesController extends Controller
             Log::error('データ登録に失敗しました。', [$e]);
         }
         return redirect("/mypage/scenarios/{$id}")->with('success', '保存しました。');
-        // if ($request->file('file')->isValid([])) {
-        //     $filename = $request->file->store('public/thumbnail');
-        //     if ($filename) {
-        //         $request->merge(['thumbnail' => basename($filename)]);
-        //     }
-        //
-        //
-        //     return redirect("/mypage/scenarios/{$id}")->with('success', '保存しました。');
-        // } else {
-        //     return redirect()
-        //         ->back()
-        //         ->withInput()
-        //         ->withErrors(['file' => '不正な画像データです。']);
-        // }
     }
 
     /**

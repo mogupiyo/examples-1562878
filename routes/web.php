@@ -32,6 +32,8 @@ Auth::routes();
 * ログインさえしていればアクセス可能なアクション
 ***************************************************************************/
 Route::group(['middleware' => 'auth'], function () {
+    // コメント用
+    Route::post('/comments/{story}', 'CommentsController@store');
     // ログアウト用
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 });

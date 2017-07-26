@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Story extends Model
 {
     public function getRecordById($id) {
-        return $this::Target($id)
-                    // ->JoinCategories()
-                    // ->JoinUsers()
-                    // ->SelectCol()
-                    ->first();
+        return $this::find($id);
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Comment')->leftJoin('users', 'users.id', '=', 'comments.user_id');
     }
 
     public function getRecordsById($scenario_id) {
@@ -80,7 +80,7 @@ class Story extends Model
     }
 
     public function scopeTarget($query, $id) {
-        $query->where('id', '=', $id);
+        $query->where('stories.id', '=', $id);
     }
 
     public function scopeDesc($query) {
@@ -93,8 +93,8 @@ class Story extends Model
         }
     }
 
-    public function scopeJoinCategories($query) {
-        $query->leftJoin('categories','categories.id','=','scenarios.category_id');
+    public function scopeJoinComments($query) {
+        $query->leftJoin('comments','comments.story_id','=','stories.id');
     }
 
     public function scopeJoinUsers($query) {

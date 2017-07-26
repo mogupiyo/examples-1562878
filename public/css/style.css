@@ -251,73 +251,6 @@ header #header-area.header-area div {
     width: 100%;
     height: 100%;
 }
-/*.navbar {
-    border-radius: 0;
-    padding: 20px 0 0 0;
-}
-.navbar div {
-    height: 100%;
-}
-.navbar-inverse {
-    margin-bottom: 30px;
-}
-.header-navi {
-    color: #fff;
-}
-.header-navi div ul li a span {
-    color: #fff;
-}
-.nav-left {
-    padding: 0 20px;
-}
-.nav-right {
-    text-align: center;
-}
-.nav-right div {
-    padding: 5px;
-}
-.site-catch {
-    margin: 0;
-    padding: 0;
-}
-.site-title a {
-    color: #fff;
-    text-decoration: none;
-}
-#post-scenario {
-    display: none;
-    width: 100%;
-}
-#auth-control {
-    display: none;
-}
-.auth-button label {
-    padding: 5px;
-    border-radius: 5px;
-}
-#search-box {
-    display: none;
-}
-.navfooter {
-    margin: 5px 5px 15px 5px;
-    width: calc(100% - 10px);
-}
-.navfooter a div {
-    display: table;
-    color: #fff;
-    padding: 5px;
-    font-size: 12px;
-    text-align: center;
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #fff;
-}
-.navfooter a div:hover {
-    background-color: #fff;
-    color: #000;
-}
-.navfooter a div p {
-    display: table-cell;
-}*/
 
 /**
  * フッター
@@ -471,31 +404,6 @@ li .category {
  *-----------------------------
 *******************************/
 
-/**
- * 作者の方へ、読者の方へ、関係者の方へ
- */
-.hang-navi p {
-    padding: auto;
-    min-height: 50px;
-    text-align: center;
-    margin: 0 0 30px 0;
-    border-top: 1px solid rgba(0,0,0,0.5);
-    border-bottom: 1px solid rgba(0,0,0,0.5);
-}
-.menu-box div {
-    height: 50px;
-    background-color: #fff;
-    /*color: #fff;*/
-    font-size: 12px;
-    /*border-top: 1px solid #000;*/
-    border-bottom: 1px solid #000;
-}
-.menu-box div:hover {
-    color: #222;
-    background-color: #ccc;
-    /*border-bottom: 5px solid rgb(0, 150, 136);*/
-    border-bottom: 5px solid #222;
-}
 .special-notify div {
     margin-top: 20px;
 }
@@ -617,6 +525,41 @@ li .category {
     color: #fff;
     background-color: #0BBC0B;
 }
+
+/******************************
+ *-----------------------------
+ * ストーリー画面
+ *-----------------------------
+*******************************/
+.show-story div + div {
+    margin-top: 50px;
+}
+.comment-box ul, .comment-box li {
+    margin: 0;
+    padding: 0;
+}
+.comment-box li div {
+    margin: 0;
+    padding: 5px;
+}
+.comment-box button {
+    margin-top: 10px;
+}
+.comment-box textarea {
+    width: 100%;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}
+.comment-box li div:nth-child(2) {
+    text-align: right;
+}
+.comment-box li::after {
+    content: "";
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
+
+
 /******************************
  *-----------------------------
  * エラー画面

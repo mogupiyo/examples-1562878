@@ -3,32 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Comment;
 
-use App\Http\Requests;
-use App\Scenario;
-use App\Category;
-use App\Story;
-use App\User;
-
-class StoriesController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    protected $scenario_model;
-    protected $category_model;
-    protected $story_model;
-    protected $user_model;
+    protected $comment_model;
 
     /**
      * Construct ScenariosController
      */
-    public function __construct(Scenario $scenario_model, Category $category_model, Story $story_model, User $user_model)
+    public function __construct(Comment $comment_model)
     {
-        $this->scenario_model = $scenario_model;
-        $this->category_model = $category_model;
-        $this->story_model = $story_model;
-        $this->user_model = $user_model;
+        $this->comment_model = $comment_model;
     }
 
     /**
@@ -57,9 +46,22 @@ class StoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $story_id)
     {
-        //
+        $this->validate($request, [
+            'comment' => 'required',
+        ]);
+        try {
+            $this->comment_model->addRecord($request, $story_id);
+        } catch (\Exception $e) {
+            $errorcd = 'E5004';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+        return redirect()->back();
     }
 
     /**
@@ -68,19 +70,9 @@ class StoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($scenario_id, $story_id)
+    public function show($id)
     {
-        $scenario = $this->scenario_model->getRecordById($scenario_id);
-        $scenario_ranks = $this->scenario_model->getRecords(5);
-        $categories = $this->category_model->getRecords();
-        $story = $this->story_model->getRecordById($story_id);
-        // var_dump($story);
-        // foreach ($story as $data) {
-        //     var_dump($data);
-        // }
-        // exit;
-        $data = compact('categories', 'scenario', 'scenario_ranks', 'story');
-        return view('stories.show', $data);
+        //
     }
 
     /**
