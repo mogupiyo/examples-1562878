@@ -156,8 +156,11 @@ header #header-area.header-area div {
     border-top: 1px solid #fff;
     box-sizing: border-box;
 }
-.nav.nav-header .over div.right div.login-control > div > button {
+.nav.nav-header .over div.right div.login-control > div > a {
     width: calc(100% - 20px);
+}
+.nav.nav-header .over div.right div.login-control > div > a > button {
+    width: 100%;
 }
 .nav.nav-header .over div.right div {
     flex: 1;

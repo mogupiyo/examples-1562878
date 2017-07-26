@@ -19,17 +19,29 @@
             <div class="login-control">
                 @if (Auth::guest())
                 <div>
-                    <button type="button" class="btn btn-primary" name="button">脚本を登録する</button>
+                    <a href="/mypage/scenarios/create">
+                        <button type="button" class="btn btn-primary" name="button">脚本を登録する</button>
+                    </a>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-success" name="button">会員登録</button>
+                    <a href="/regist">
+                        <button type="button" class="btn btn-success" name="button">
+                            会員登録
+                        </button>
+                    </a>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-success" name="button">ログイン</button>
+                    <a href="/login">
+                        <button type="button" class="btn btn-success" name="button">
+                            ログイン
+                        </button>
+                    </a>
                 </div>
                 @else
                 <div style="flex: 2;">
-                    <button type="button" class="btn btn-primary" name="button">脚本を登録する</button>
+                    <a href="/mypage/scenarios/create">
+                        <button type="button" class="btn btn-primary" name="button">脚本を登録する</button>
+                    </a>
                 </div>
                 <div id="auth-control" style="display: flex; justify-content: center; align-items: center; padding-top: 5px;">
                     <ul id="login-control" class="text-center">

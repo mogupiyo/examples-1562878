@@ -18,7 +18,7 @@
 Route::get('/', 'TopsController@index');
 Route::resource('/scenarios', 'ScenariosController');
 Route::get('/scenarios/{scenario}/story/{story}', 'StoriesController@show');
-Route::resource('/tempregist', 'TempRegistController');
+Route::resource('/regist', 'TempRegistController');
 Route::get('/error', 'ErrorsController@index');
 
 // Twitterログイン用
