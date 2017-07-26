@@ -15,7 +15,7 @@
                         @foreach ( $story->comments as $comment )
                         <li>
                             <div>
-                                {{ $comment->data }}
+                                {!! nl2br($comment->data) !!}
                             </div>
                             <div>
                                 @include('modules.badges.user', [ 'item' => $comment->name ])
@@ -32,6 +32,14 @@
                         @endif
                     </ul>
                 </div>
+                @if (Auth::guest())
+                <div class="text-danger">
+                    <h3>コメントをするには会員登録・ログインが必要です。</h3>
+                    <a href="/login">
+                        <button type="button" class="btn btn-success" name="button">ログインする</button>
+                    </a>
+                </div>
+                @else
                 <div>
                     <form action="/comments/{{ $story->id }}" method="post">
                         {{ csrf_field() }}
@@ -46,6 +54,7 @@
                         </div>
                     </form>
                 </div>
+                @endif
             </div>
             <div>
                 <a href="/scenarios/{{ $scenario->id }}">

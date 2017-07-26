@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->integer('story_id')->index();
             $table->integer('user_id')->index();
-            $table->string('data');
+            $table->text('data');
             $table->timestamps();
         });
     }
