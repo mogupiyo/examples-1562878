@@ -43,7 +43,7 @@ class StoriesController extends Controller
     public function create($id)
     {
         $data = compact('id');
-        return view('stories.create', $data);
+        return view('mypage.stories.create', $data);
     }
 
     /**
@@ -109,7 +109,7 @@ class StoriesController extends Controller
     {
         $story = $this->story_model->getRecordById($story_id);
         $data = compact('story', 'scenario_id', 'story_id');
-        return view('stories.edit', $data);
+        return view('mypage.stories.edit', $data);
     }
 
     /**
