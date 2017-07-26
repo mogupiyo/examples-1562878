@@ -12,8 +12,12 @@ class DailyViewLog extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid', 'scenario_id', 'story_id',
+        'uuid', 'scenario_id', 'story_id', 'count',
     ];
+
+    public function getRecords() {
+        return $this->select(\DB::raw('scenario_id, count("count") as count'))->groupBy('scenario_id')->get();
+    }
 
     public function addRecord($id, $type) {
         // generate uuid from item id, ip address, user-agent and date.
@@ -25,7 +29,12 @@ class DailyViewLog extends Model
             'uuid' => $uuid,
             'scenario_id' => ($type === 'scenario') ? $id : null ,
             'story_id' => ($type === 'story') ? $id : null ,
+            'count' => 1,
         ]);
+    }
+
+    public function resetTable() {
+        return $this->truncate();
     }
 
 }

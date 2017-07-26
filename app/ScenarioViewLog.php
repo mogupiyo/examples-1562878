@@ -15,6 +15,17 @@ class ScenarioViewLog extends Model
         'scenario_id', 'count',
     ];
 
-    public static function updateRecord($id) {
+    public function updateRecord($id, $plus_count)
+    {
+        $data = $this->where('scenario_id', $id)->first();
+        if (count($data) > 0) {
+            return $this->where('scenario_id', $id)->update([
+                'count' => $data->count + $plus_count
+            ]);
+        }
+        return $this->create([
+            'scenario_id' => $id,
+            'count' => $plus_count
+        ]);
     }
 }

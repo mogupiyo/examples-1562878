@@ -18,6 +18,7 @@ class CreateDailyviewlogsTable extends Migration
             $table->string('uuid');
             $table->integer('scenario_id')->nullable()->index();
             $table->integer('story_id')->nullable()->index();
+            $table->integer('count');
             $table->timestamps();
         });
     }
