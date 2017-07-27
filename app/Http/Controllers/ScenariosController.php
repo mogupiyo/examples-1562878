@@ -62,7 +62,7 @@ class ScenariosController extends Controller
      */
     public function create()
     {
-        return redirect('/scenarios');
+        return redirect()->back();
     }
 
     /**
@@ -73,7 +73,7 @@ class ScenariosController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('/scenarios');
+        return redirect()->back();
     }
 
     /**
@@ -111,7 +111,7 @@ class ScenariosController extends Controller
      */
     public function edit($id)
     {
-        return redirect('/scenarios');
+        return redirect()->back();
     }
 
     /**
@@ -122,6 +122,6 @@ class ScenariosController extends Controller
      */
     public function destroy($id)
     {
-        return redirect('/scenarios');
+        return redirect()->back();
     }
 }

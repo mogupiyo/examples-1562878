@@ -28,6 +28,14 @@ class Story extends Model
                     ->get();
     }
 
+    public function dailyview() {
+        return $this->hasMany('App\DailyViewLog');
+    }
+
+    public function totalview() {
+        return $this->hasOne('App\StoryViewLog');
+    }
+
     public function addRecord($request, $id) {
         $last_one = $this::where('scenario_id', '=', $id)->where('user_id', '=', Auth::user()->id)->orderBy('id')->first();
         $numbering = 1;

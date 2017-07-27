@@ -18,7 +18,7 @@
 				<div class="badge-box">
 			        @include('modules.badges.date', [ 'item' => $data->created_at ])
 			        @include('modules.badges.cate', [ 'item' => $data->label ])
-			        @include('modules.badges.view', [ 'item' => rand(5, 1000) ])
+					@include('modules.badges.view', [ 'item' => (count($data->dailyview) + $data->totalview['count']) ])
 			        @include('modules.badges.star', [ 'item' => rand(5, 1000) ])
 			        @include('modules.badges.user', [ 'item' => $data->name ])
 				</div>

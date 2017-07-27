@@ -91,7 +91,7 @@ class StoriesController extends Controller
      */
     public function show($id)
     {
-        return "show";
+        return redirect()->back();
     }
 
     /**

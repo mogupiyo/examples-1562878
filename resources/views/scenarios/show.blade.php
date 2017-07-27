@@ -9,7 +9,7 @@
     </div>
     <div style="padding: 10px 0;">
         @include('modules.badges.user', [ 'item' => $scenario->name ])
-        @include('modules.badges.view', [ 'item' => rand(5, 1000) ])
+        @include('modules.badges.view', [ 'item' => (count($scenario->dailyview) + $scenario->totalview['count']) ])
         @include('modules.badges.star', [ 'item' => rand(5, 1000) ])
         @include('modules.badges.date', [ 'item' => $scenario->created_at ])
     </div>
@@ -17,16 +17,16 @@
     <div class="form-group">
         @foreach ($stories as $data)
         <ul class="list-group outer">
-            <a href="/scenarios/{{ $scenario->id }}/story/{{ $data->id }}">
                 <li class="list-group-item">
-                    <div class="">
-                        <span>{{ $data->scene }}</span>
-                        <span>{{ $data->topic }}</span>
-                    </div>
-            </a>
+                    <a href="/scenarios/{{ $scenario->id }}/story/{{ $data->id }}">
+                        <div class="">
+                            <span>{{ $data->scene }}</span>
+                            <span>{{ $data->topic }}</span>
+                        </div>
+                    </a>
                     <div class="" style="padding: 5px 0;">
-                        @include('modules.badges.date', [ 'item' => $scenario->created_at ])
-                        @include('modules.badges.like', [ 'item' => rand(5, 1000) ])
+                        @include('modules.badges.date', [ 'item' => $data->created_at ])
+                        @include('modules.badges.view', [ 'item' => (count($data->dailyview) + $data->totalview['count']) ])
                     </div>
                 </li>
         </ul>

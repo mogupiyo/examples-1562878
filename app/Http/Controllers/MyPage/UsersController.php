@@ -30,7 +30,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
         return view('users.index');
     }
 
@@ -41,7 +40,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -52,7 +51,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -63,7 +62,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -74,7 +73,6 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
         return view('users.edit');
     }
 
@@ -87,7 +85,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -98,7 +96,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -135,12 +133,8 @@ class UsersController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
             'file' => [
-                // 必須
-                // 'required',
-                // アップロードされたファイルであること
-                'file',
-                // 最小縦横50px 最大縦横1980px
-                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980',
+                'file', // アップロードされたファイルであること
+                'dimensions:min_width=50,min_height=50,max_width=1980,max_height=1980', // 最小縦横50px 最大縦横1980px
             ]
         ]);
 
@@ -169,6 +163,5 @@ class UsersController extends Controller
                 ->withInput()
                 ->withErrors(['file' => \Lang::get("errors.{$errorcd}")]);
         }
-
     }
 }

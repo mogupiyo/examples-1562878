@@ -38,10 +38,20 @@ class TopsController extends Controller
      */
     public function index()
     {
-        $scenarios = $this->scenario_model->getRecords();
-        $scenario_ranks = $this->scenario_model->getRecords(5);
-        $categories = $this->category_model->getRecords();
-        $influence_users = $this->user_model->getInfluenceUsers();
+        try {
+            $scenarios = $this->scenario_model->getRecords();
+            $scenario_ranks = $this->scenario_model->getRecords(5);
+            $categories = $this->category_model->getRecords();
+            $influence_users = $this->user_model->getInfluenceUsers();
+        } catch (\Exception $e) {
+            $errorcd = 'E5101';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+
         $data = compact('scenarios', 'scenario_ranks', 'categories', 'influence_users');
         return view('tops.index', $data);
     }
@@ -53,7 +63,7 @@ class TopsController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -64,7 +74,7 @@ class TopsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -75,28 +85,22 @@ class TopsController extends Controller
      */
     public function show($id)
     {
-        $scenario = $this->scenario_model->getRecordById($id);
-        $scenario_ranks = $this->scenario_model->getRecords(5);
-        $categories = $this->category_model->getRecords();
-        $stories = $this->story_model->getRecordsById($id);
+        try {
+            $scenario = $this->scenario_model->getRecordById($id);
+            $scenario_ranks = $this->scenario_model->getRecords(5);
+            $categories = $this->category_model->getRecords();
+            $stories = $this->story_model->getRecordsById($id);
+        } catch (\Exception $e) {
+            $errorcd = 'E5101';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+
         $data = compact('categories', 'scenario', 'scenario_ranks', 'stories');
         return view('tops.show', $data);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showStory($scenario_id, $story_id)
-    {
-        $scenario = $this->scenario_model->getRecordById($scenario_id);
-        $scenario_ranks = $this->scenario_model->getRecords(5);
-        $categories = $this->category_model->getRecords();
-        $story = $this->story_model->getRecordById($story_id);
-        $data = compact('categories', 'scenario', 'scenario_ranks', 'story');
-        return view('tops.show-story', $data);
     }
 
     /**
@@ -107,7 +111,7 @@ class TopsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -119,7 +123,7 @@ class TopsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -130,6 +134,6 @@ class TopsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->back();
     }
 }

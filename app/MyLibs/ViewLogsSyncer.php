@@ -1,7 +1,6 @@
 <?php namespace App\MyLibs;
 
 use App\DailyViewLog as DVL;
-use App\DailyViewBatch as DVB;
 
 class ViewLogsSyncer {
 
@@ -12,9 +11,14 @@ class ViewLogsSyncer {
     public function scenario()
     {
         $this->daily_model = new DVL();
-        $this->batch_model = new DVB();
-        $data = $this->daily_model->getRecords();
-        $this->batch_model->sync($data);
+        $data = $this->daily_model->getRecords('scenario_id');
+        return $data;
+    }
+
+    public function story()
+    {
+        $this->daily_model = new DVL();
+        $data = $this->daily_model->getRecords('story_id');
         return $data;
     }
 

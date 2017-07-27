@@ -37,7 +37,17 @@ class ScenariosController extends Controller
      */
     public function index()
     {
-        $scenarios = $this->scenario_model->getMyRecords();
+        try {
+            $scenarios = $this->scenario_model->getMyRecords();
+        } catch (\Exception $e) {
+            $errorcd = 'E5202';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+
         $data = compact('scenarios');
         return view('mypage.scenarios.index', $data);
     }
@@ -49,7 +59,17 @@ class ScenariosController extends Controller
      */
     public function create()
     {
-        $categories = $this->category_model->getRecords();
+        try {
+            $categories = $this->category_model->getRecords();
+        } catch (\Exception $e) {
+            $errorcd = 'E5202';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+
         $data = compact('categories');
         return view('mypage.scenarios.create', $data);
     }
@@ -101,9 +121,19 @@ class ScenariosController extends Controller
      */
     public function show($id)
     {
-        $scenario = $this->scenario_model->getRecordById($id);
-        $categories = $this->category_model->getRecords();
-        $stories = $this->story_model->getRecordsById($id);
+        try {
+            $scenario = $this->scenario_model->getRecordById($id);
+            $categories = $this->category_model->getRecords();
+            $stories = $this->story_model->getRecordsById($id);
+        } catch (\Exception $e) {
+            $errorcd = 'E5202';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+
         $data = compact('categories', 'scenario', 'stories');
         return view('mypage.scenarios.show', $data);
     }
@@ -116,8 +146,18 @@ class ScenariosController extends Controller
      */
     public function edit($id)
     {
-        $scenario = $this->scenario_model->getRecordById($id);
-        $categories = $this->category_model->getRecords();
+        try {
+            $scenario = $this->scenario_model->getRecordById($id);
+            $categories = $this->category_model->getRecords();
+        } catch (\Exception $e) {
+            $errorcd = 'E5202';
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
+            return redirect('/error')->with([
+                'errorcd' => $errorcd,
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
+            ]);
+        }
+
         $data = compact('categories', 'scenario');
         return view('mypage.scenarios.edit', $data);
     }

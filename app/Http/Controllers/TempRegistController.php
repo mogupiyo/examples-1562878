@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Log;
 use Mail;
-use Lang;
 use Validator;
 use App\Http\Requests;
 use App\Mail\MailManager;
@@ -70,10 +68,10 @@ class TempRegistController extends Controller
             ]);
         } catch (\Exception $e) {
             $errorcd = 'E5001';
-            Log::error(Lang::get("errors.{$errorcd}"), [$e]);
+            \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);
             return redirect('/error')->with([
                 'errorcd' => $errorcd,
-                'errormsg' => Lang::get("errors.{$errorcd}"),
+                'errormsg' => \Lang::get("errors.{$errorcd}"),
             ]);
         }
     }

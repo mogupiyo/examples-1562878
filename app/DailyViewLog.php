@@ -15,13 +15,13 @@ class DailyViewLog extends Model
         'uuid', 'scenario_id', 'story_id', 'count',
     ];
 
-    public function getRecords() {
-        return $this->select(\DB::raw('scenario_id, count("count") as count'))->groupBy('scenario_id')->get();
+    public function getRecords($field) {
+        return $this::whereNotNull($field)->select(\DB::raw("{$field}, count('count') as count"))->groupBy($field)->get();
     }
 
     public function addRecord($id, $type) {
         // generate uuid from item id, ip address, user-agent and date.
-        $uuid = 'item-'.$id.$_SERVER["REMOTE_ADDR"].'-'.$_SERVER['HTTP_USER_AGENT'].'-'.date("YmdH");
+        $uuid = 'item-'.$id.$_SERVER["REMOTE_ADDR"].'-'.$_SERVER['HTTP_USER_AGENT'].'-'.\Config::get('const.pageview.expires');
         if (count($this->where('uuid', $uuid)->first()) > 0) {
             return false;
         }

@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\MailTestCommand::class,
-        \App\Console\Commands\SyncerTestCommand::class,
+        \App\Console\Commands\SyncPageViewCommand::class,
     ];
 
     /**
@@ -25,8 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('syncpv')->hourly();
     }
 
     /**

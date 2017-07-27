@@ -33,8 +33,12 @@ class Scenario extends Model
                     ->get();
     }
 
-    public function pageview() {
+    public function dailyview() {
         return $this->hasMany('App\DailyViewLog');
+    }
+
+    public function totalview() {
+        return $this->hasOne('App\ScenarioViewLog');
     }
 
     public function addRecord($request) {
