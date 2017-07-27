@@ -159,7 +159,7 @@ class StoriesController extends Controller
         # データの削除を実行。
         #############################################################
         try {
-            $result = $this->story_model->deleteRecord($story_id);
+            $this->story_model->deleteRecord($story_id);
         } catch (\Exception $e) {
             $errorcd = 'E5204';
             \Log::error(\Lang::get("errors.{$errorcd}"), [$e]);

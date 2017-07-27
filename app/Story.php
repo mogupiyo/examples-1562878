@@ -68,13 +68,6 @@ class Story extends Model
         return $model->save();
     }
 
-    /**
-     * 通話時応答挙動リストを削除します。
-     *
-     * @param  integer $id trakcing_callsテーブルのid
-     * @param  \Illuminate\Http\Request  $request リクエスト情報
-     * @return array          登録結果(true: 成功, false: 失敗)
-     */
     public function deleteRecord($id) {
         return $this::where('id', $id)
                     ->where('user_id', Auth::user()->id)

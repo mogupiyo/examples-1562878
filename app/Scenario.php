@@ -41,6 +41,14 @@ class Scenario extends Model
         return $this->hasOne('App\ScenarioViewLog');
     }
 
+    public function mybookmarks() {
+        return $this->hasMany('App\Bookmark')->where('user_id', Auth::user()->id)->where('active', true);
+    }
+
+    public function bookmarks() {
+        return $this->hasMany('App\Bookmark');
+    }
+
     public function addRecord($request) {
         $this->user_id = Auth::user()->id;
         $this->title = $request->title;

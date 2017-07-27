@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'mypage'], function () {
     Route::post('/upload', 'MyPage\UsersController@upload');
     // 映画・テレビ関係者ですかのモーダルウィンドウからのアクセス
     Route::post('/film_related', 'MyPage\UsersController@filmRelated');
+    // ブックマーク用
+    Route::resource('/bookmarks', 'MyPage\BookmarksController');
 
 });
 
